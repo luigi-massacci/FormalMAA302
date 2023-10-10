@@ -20,6 +20,7 @@ open Set
 
 -- Click with your cursor before / after a line to see the state of the proof
 -- before / after the instruction is executed
+-- You can also move using the up/down arrows
 
 axiom X : Type _
 
