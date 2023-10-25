@@ -133,5 +133,12 @@ lemma O_is_openInter : ∀ U V : Set X, U ∈ O → V ∈ O → U ∩ V ∈ O:= 
       rw [← h] at this
       assumption
 
+instance : TopologicalSpace X := by
+  constructor
+  on_goal 4 => {exact O}
+  exact O_is_openX
+  exact O_is_openInter
+  exact O_isOpen_sUnion
+
 
 -- ... and we are done!

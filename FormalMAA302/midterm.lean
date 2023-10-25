@@ -5,7 +5,6 @@ import Mathlib.Topology.Basic
 import Mathlib.Data.Set.Countable
 
 
-
 -- COFINITE TOPOLOGY
 section III
 
@@ -51,6 +50,13 @@ lemma O_is_openInter : ∀ U V : Set X, U ∈ O → V ∈ O → U ∩ V ∈ O:= 
   simp [compl_inter, Finite.union]
   aesop
 
+
+instance : TopologicalSpace X := by
+  constructor
+  on_goal 4 => {exact O}
+  exact O_is_openX
+  exact O_is_openInter
+  exact O_isOpen_sUnion
 
 
 
