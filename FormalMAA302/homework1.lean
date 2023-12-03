@@ -140,5 +140,6 @@ instance : TopologicalSpace X := by
   exact O_is_openInter
   exact O_isOpen_sUnion
 
-
+example : Nat.Prime 5 := by
+  sorry
 -- ... and we are done!

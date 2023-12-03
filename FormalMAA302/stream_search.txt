@@ -1,0 +1,818 @@
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:74:variable {g : GeneralizedContinuedFraction K} {s : Stream'.Seq <| Pair K}
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:94:def squashSeq (s : Stream'.Seq <| Pair K) (n : ℕ) : Stream'.Seq (Pair K) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:97:    Stream'.Seq.nats.zipWith
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:140:      simp only [squashSeq, Stream'.Seq.get?_tail, s_succ_nth_eq, s_succ_succ_nth_eq]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:151:      · simp only [*, squashSeq, Stream'.Seq.get?_tail, Stream'.Seq.get?_zipWith,
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:171:      simp_all [convergents'Aux, Stream'.Seq.head, Stream'.Seq.get?_tail]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:181:        simpa [Stream'.Seq.get?_tail] using s_succ_nth_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/ConvergentsEquiv.lean:232:      simp [g_s_head_eq, squashGCF, convergents', convergents'Aux, Stream'.Seq.head]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/TerminatedStable.lean:45:theorem convergents'Aux_stable_step_of_terminated {s : Stream'.Seq <| Pair K}
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/TerminatedStable.lean:49:  case zero => simp only [convergents'Aux, terminated_at_n, Stream'.Seq.head]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/TerminatedStable.lean:55:        simp only [Stream'.Seq.TerminatedAt, s.get?_tail, terminated_at_n]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/TerminatedStable.lean:61:theorem convergents'Aux_stable_of_terminated {s : Stream'.Seq <| Pair K} (n_le_m : n ≤ m)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Approximations.lean:295:  · have : g.partialDenominators.get? n = none := by rwa [Stream'.Seq.TerminatedAt] at terminated
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Approximations.lean:297:      terminatedAt_iff_part_denom_none.2 (by rwa [Stream'.Seq.TerminatedAt] at terminated)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:212:  rw [of_terminatedAt_iff_intFractPair_seq1_terminatedAt, Stream'.Seq.TerminatedAt,
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:233:    simpa [Stream'.Seq.get?_tail, Stream'.Seq.map_get?] using s_nth_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:245:  simp [Stream'.Seq.map_tail, Stream'.Seq.get?_tail, Stream'.Seq.map_get?, stream_succ_nth_eq]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:267:  simp only [of, Stream'.Seq.map_tail, Stream'.Seq.map, Stream'.Seq.tail, Stream'.Seq.head,
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:268:    Stream'.Seq.get?, Stream'.map]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:269:  rw [← Stream'.nth_succ, Stream'.nth, Option.map]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:285:theorem of_s_of_int (a : ℤ) : (of (a : K)).s = Stream'.Seq.nil :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:291:  Stream'.Seq.ext fun n => (h n).trans (Stream'.Seq.get?_nil n).symm
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:303:      Stream'.Seq.get?_nil, Stream'.Seq.get?_nil]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:320:  Stream'.Seq.ext fun n => Stream'.Seq.get?_tail (of v).s n ▸ of_s_succ v n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Translations.lean:332:    exact convergents'Aux_succ_none ((of_s_of_int K a).symm ▸ Stream'.Seq.get?_nil 0) _
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Basic.lean:149:protected def stream (v : K) : Stream' <| Option (IntFractPair K)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Basic.lean:173:protected def seq1 (v : K) : Stream'.Seq1 <| IntFractPair K :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/Basic.lean:176:    Stream'.Seq.tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/TerminatesIffRat.lean:199:    ((IntFractPair.stream q).map (Option.map (mapFr (↑))) : Stream' <| Option <| IntFractPair K) =
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/TerminatesIffRat.lean:217:  simp only [of, IntFractPair.seq1, Stream'.Seq.map_get?, Stream'.Seq.get?_tail]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/TerminatesIffRat.lean:218:  simp only [Stream'.Seq.get?]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/TerminatesIffRat.lean:221:    simp [Stream'.map, Stream'.nth, succ_nth_stream_eq]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/TerminatesIffRat.lean:224:theorem coe_of_s_rat_eq : ((of q).s.map (Pair.map ((↑))) : Stream'.Seq <| Pair K) = (of v).s := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Computation/TerminatesIffRat.lean:243:    simp only [Stream'.Seq.TerminatedAt, (coe_of_s_get?_rat_eq v_eq_q n).symm] at h ⊢ <;>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Translations.lean:67:  simpa [partialNumerators, Stream'.Seq.map_get?] using nth_part_num_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Translations.lean:73:  simpa [partialDenominators, Stream'.Seq.map_get?] using nth_part_denom_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Translations.lean:170:theorem zeroth_convergent'_aux_eq_zero {s : Stream'.Seq <| Pair K} :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Translations.lean:179:theorem convergents'Aux_succ_none {s : Stream'.Seq (Pair K)} (h : s.head = none) (n : ℕ) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Translations.lean:183:theorem convergents'Aux_succ_some {s : Stream'.Seq (Pair K)} {p : Pair K} (h : s.head = some p)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:117:  s : Stream'.Seq <| Pair α
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:128:  ⟨a, Stream'.Seq.nil⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:135:def partialNumerators (g : GeneralizedContinuedFraction α) : Stream'.Seq α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:140:def partialDenominators (g : GeneralizedContinuedFraction α) : Stream'.Seq α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:173:  fun g ↦ ⟨(g.h : β), (g.s.map (↑) : Stream'.Seq <| Pair β)⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:182:      ⟨(g.h : β), (g.s.map (↑) : Stream'.Seq <| Pair β)⟩ := rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:354:def continuantsAux (g : GeneralizedContinuedFraction K) : Stream' (Pair K)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:364:def continuants (g : GeneralizedContinuedFraction K) : Stream' (Pair K) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:369:def numerators (g : GeneralizedContinuedFraction K) : Stream' K :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:374:def denominators (g : GeneralizedContinuedFraction K) : Stream' K :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:379:def convergents (g : GeneralizedContinuedFraction K) : Stream' K :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Algebra/ContinuedFractions/Basic.lean:388:def convergents'Aux : Stream'.Seq (Pair K) → ℕ → K
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Topology/MetricSpace/CantorScheme.lean:30:As a result, functions like `List.get?` or `Stream'.take` do not have their intended meaning
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Control/Fix.lean:50:def Fix.approx : Stream' (∀ a, Part (β a))
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Control/LawfulFix.lean:127:  Stream'.mem_of_nth_eq rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Parallel.lean:25:open Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:36:  { f : Stream' (Option α) // ∀ ⦃n a⦄, f n = some a → f (n + 1) = some a }
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:47:  ⟨Stream'.const (some a), fun _ _ => id⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:58:  ⟨Stream'.cons none c.1, fun n a h => by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:89:  ⟨Stream'.const none, fun _ _ => id⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:139:    exact (Stream'.eta f).symm
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:220:  refine' ⟨Stream'.corec' (Corec.f f) (Sum.inr b), fun n a' h => _⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:221:  rw [Stream'.corec'_eq]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:222:  change Stream'.corec' (Corec.f f) (Corec.f f (Sum.inr b)).2 n = some a'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:229:  · rw [Stream'.corec'_eq (Corec.f f) (Corec.f f o).2, Stream'.corec'_eq (Corec.f f) o]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:250:-- Secondly, the proof that `Stream'.corec' (Corec.f f) (Sum.inr b) 0` is this function
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:255:  rw [show Stream'.corec' (Corec.f f) (Sum.inr b) 0 =
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:257:    dsimp [Corec.f, Stream'.corec', Stream'.corec, Stream'.map, Stream'.nth, Stream'.iterate]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:266:  rw [Stream'.corec'_eq, Stream'.tail_cons]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:295:  apply Stream'.eq_of_bisim fun x y => ∃ s s' : Computation α, s.1 = x ∧ s'.1 = y ∧ R s s'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:296:  · dsimp [Stream'.IsBisimulation]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:363:      dsimp [Stream'.nth] at h
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:562:    · simp [think, Stream'.cons] at this
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:649:      dsimp [Stream'.map, Stream'.nth]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:697:  | ⟨s, al⟩ => by apply Subtype.eq; dsimp [think, map]; rw [Stream'.map_cons]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:711:    simp [e, h, Stream'.map_id]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Computation.lean:717:    apply congr_arg fun f : _ → Option γ => Stream'.map f s
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:18:namespace Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:43:#align stream.wseq Stream'.WSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:60:#align stream.wseq.of_seq Stream'.WSeq.ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:66:#align stream.wseq.of_list Stream'.WSeq.ofList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:70:def ofStream (l : Stream' α) : WSeq α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:72:#align stream.wseq.of_stream Stream'.WSeq.ofStream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:76:#align stream.wseq.coe_seq Stream'.WSeq.coeSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:80:#align stream.wseq.coe_list Stream'.WSeq.coeList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:82:instance coeStream : Coe (Stream' α) (WSeq α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:84:#align stream.wseq.coe_stream Stream'.WSeq.coeStream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:89:#align stream.wseq.nil Stream'.WSeq.nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:93:#align stream.wseq.inhabited Stream'.WSeq.inhabited
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:98:#align stream.wseq.cons Stream'.WSeq.cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:103:#align stream.wseq.think Stream'.WSeq.think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:113:#align stream.wseq.destruct Stream'.WSeq.destruct
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:119:#align stream.wseq.rec_on Stream'.WSeq.recOn
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:124:#align stream.wseq.mem Stream'.WSeq.Mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:128:#align stream.wseq.has_mem Stream'.WSeq.membership
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:132:#align stream.wseq.not_mem_nil Stream'.WSeq.not_mem_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:138:#align stream.wseq.head Stream'.WSeq.head
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:147:#align stream.wseq.flatten Stream'.WSeq.flatten
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:154:#align stream.wseq.tail Stream'.WSeq.tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:160:#align stream.wseq.drop Stream'.WSeq.drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:165:#align stream.wseq.nth Stream'.WSeq.get?
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:176:#align stream.wseq.to_list Stream'.WSeq.toList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:187:#align stream.wseq.length Stream'.WSeq.length
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:193:#align stream.wseq.is_finite Stream'.WSeq.IsFinite
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:197:#align stream.wseq.to_list_terminates Stream'.WSeq.toList_terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:202:#align stream.wseq.get Stream'.WSeq.get
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:209:#align stream.wseq.productive Stream'.WSeq.Productive
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:210:#align stream.wseq.productive.nth_terminates Stream'.WSeq.Productive.get?_terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:214:#align stream.wseq.productive_iff Stream'.WSeq.productive_iff
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:218:#align stream.wseq.nth_terminates Stream'.WSeq.get?_terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:222:#align stream.wseq.head_terminates Stream'.WSeq.head_terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:235:#align stream.wseq.update_nth Stream'.WSeq.updateNth
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:248:#align stream.wseq.remove_nth Stream'.WSeq.removeNth
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:257:#align stream.wseq.filter_map Stream'.WSeq.filterMap
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:262:#align stream.wseq.filter Stream'.WSeq.filter
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:268:#align stream.wseq.find Stream'.WSeq.find
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:281:#align stream.wseq.zip_with Stream'.WSeq.zipWith
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:286:#align stream.wseq.zip Stream'.WSeq.zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:290:  (zip s (Stream'.nats : WSeq ℕ)).filterMap fun ⟨a, n⟩ => if p a then some n else none
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:291:#align stream.wseq.find_indexes Stream'.WSeq.findIndexes
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:296:#align stream.wseq.find_index Stream'.WSeq.findIndex
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:301:#align stream.wseq.index_of Stream'.WSeq.indexOf
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:306:#align stream.wseq.indexes_of Stream'.WSeq.indexesOf
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:322:#align stream.wseq.union Stream'.WSeq.union
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:327:#align stream.wseq.is_empty Stream'.WSeq.isEmpty
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:334:#align stream.wseq.compute Stream'.WSeq.compute
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:346:#align stream.wseq.take Stream'.WSeq.take
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:359:#align stream.wseq.split_at Stream'.WSeq.splitAt
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:370:#align stream.wseq.any Stream'.WSeq.any
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:381:#align stream.wseq.all Stream'.WSeq.all
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:397:#align stream.wseq.scanl Stream'.WSeq.scanl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:411:#align stream.wseq.inits Stream'.WSeq.inits
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:417:#align stream.wseq.collect Stream'.WSeq.collect
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:423:#align stream.wseq.append Stream'.WSeq.append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:428:#align stream.wseq.map Stream'.WSeq.map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:439:#align stream.wseq.join Stream'.WSeq.join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:444:#align stream.wseq.bind Stream'.WSeq.bind
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:453:#align stream.wseq.lift_rel_o Stream'.WSeq.LiftRelO
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:461:#align stream.wseq.lift_rel_o.imp Stream'.WSeq.LiftRelO.imp
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:466:#align stream.wseq.lift_rel_o.imp_right Stream'.WSeq.LiftRelO.imp_right
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:472:#align stream.wseq.bisim_o Stream'.WSeq.BisimO
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:477:#align stream.wseq.bisim_o.imp Stream'.WSeq.BisimO.imp
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:485:#align stream.wseq.lift_rel Stream'.WSeq.LiftRel
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:493:#align stream.wseq.equiv Stream'.WSeq.Equiv
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:501:#align stream.wseq.lift_rel_destruct Stream'.WSeq.liftRel_destruct
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:518:#align stream.wseq.lift_rel_destruct_iff Stream'.WSeq.liftRel_destruct_iff
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:526:#align stream.wseq.destruct_congr Stream'.WSeq.destruct_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:531:#align stream.wseq.destruct_congr_iff Stream'.WSeq.destruct_congr_iff
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:543:#align stream.wseq.lift_rel.refl Stream'.WSeq.LiftRel.refl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:550:#align stream.wseq.lift_rel_o.swap Stream'.WSeq.LiftRelO.swap
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:557:#align stream.wseq.lift_rel.swap_lem Stream'.WSeq.LiftRel.swap_lem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:561:#align stream.wseq.lift_rel.swap Stream'.WSeq.LiftRel.swap
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:565:#align stream.wseq.lift_rel.symm Stream'.WSeq.LiftRel.symm
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:597:#align stream.wseq.lift_rel.trans Stream'.WSeq.LiftRel.trans
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:601:#align stream.wseq.lift_rel.equiv Stream'.WSeq.LiftRel.equiv
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:606:#align stream.wseq.equiv.refl Stream'.WSeq.Equiv.refl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:611:#align stream.wseq.equiv.symm Stream'.WSeq.Equiv.symm
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:616:#align stream.wseq.equiv.trans Stream'.WSeq.Equiv.trans
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:620:#align stream.wseq.equiv.equivalence Stream'.WSeq.Equiv.equivalence
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:627:#align stream.wseq.destruct_nil Stream'.WSeq.destruct_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:632:#align stream.wseq.destruct_cons Stream'.WSeq.destruct_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:637:#align stream.wseq.destruct_think Stream'.WSeq.destruct_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:642:#align stream.wseq.seq_destruct_nil Stream'.WSeq.seq_destruct_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:647:#align stream.wseq.seq_destruct_cons Stream'.WSeq.seq_destruct_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:652:#align stream.wseq.seq_destruct_think Stream'.WSeq.seq_destruct_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:656:#align stream.wseq.head_nil Stream'.WSeq.head_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:660:#align stream.wseq.head_cons Stream'.WSeq.head_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:664:#align stream.wseq.head_think Stream'.WSeq.head_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:675:#align stream.wseq.flatten_ret Stream'.WSeq.flatten_pure
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:680:#align stream.wseq.flatten_think Stream'.WSeq.flatten_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:696:#align stream.wseq.destruct_flatten Stream'.WSeq.destruct_flatten
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:700:#align stream.wseq.head_terminates_iff Stream'.WSeq.head_terminates_iff
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:704:#align stream.wseq.tail_nil Stream'.WSeq.tail_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:708:#align stream.wseq.tail_cons Stream'.WSeq.tail_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:712:#align stream.wseq.tail_think Stream'.WSeq.tail_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:716:#align stream.wseq.dropn_nil Stream'.WSeq.dropn_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:725:#align stream.wseq.dropn_cons Stream'.WSeq.dropn_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:730:#align stream.wseq.dropn_think Stream'.WSeq.dropn_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:735:#align stream.wseq.dropn_add Stream'.WSeq.dropn_add
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:741:#align stream.wseq.dropn_tail Stream'.WSeq.dropn_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:745:#align stream.wseq.nth_add Stream'.WSeq.get?_add
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:749:#align stream.wseq.nth_tail Stream'.WSeq.get?_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:754:#align stream.wseq.join_nil Stream'.WSeq.join_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:761:#align stream.wseq.join_think Stream'.WSeq.join_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:768:#align stream.wseq.join_cons Stream'.WSeq.join_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:773:#align stream.wseq.nil_append Stream'.WSeq.nil_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:778:#align stream.wseq.cons_append Stream'.WSeq.cons_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:783:#align stream.wseq.think_append Stream'.WSeq.think_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:788:#align stream.wseq.append_nil Stream'.WSeq.append_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:793:#align stream.wseq.append_assoc Stream'.WSeq.append_assoc
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:800:#align stream.wseq.tail.aux Stream'.WSeq.tail.aux
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:805:#align stream.wseq.destruct_tail Stream'.WSeq.destruct_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:812:#align stream.wseq.drop.aux Stream'.WSeq.drop.aux
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:819:#align stream.wseq.drop.aux_none Stream'.WSeq.drop.aux_none
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:826:#align stream.wseq.destruct_dropn Stream'.WSeq.destruct_dropn
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:838:#align stream.wseq.head_terminates_of_head_tail_terminates Stream'.WSeq.head_terminates_of_head_tail_terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:849:#align stream.wseq.destruct_some_of_destruct_tail_some Stream'.WSeq.destruct_some_of_destruct_tail_some
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:858:#align stream.wseq.head_some_of_head_tail_some Stream'.WSeq.head_some_of_head_tail_some
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:867:#align stream.wseq.head_some_of_nth_some Stream'.WSeq.head_some_of_get?_some
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:871:#align stream.wseq.productive_tail Stream'.WSeq.productive_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:875:#align stream.wseq.productive_dropn Stream'.WSeq.productive_dropn
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:889:#align stream.wseq.to_seq Stream'.WSeq.toSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:895:#align stream.wseq.nth_terminates_le Stream'.WSeq.get?_terminates_le
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:900:#align stream.wseq.head_terminates_of_nth_terminates Stream'.WSeq.head_terminates_of_get?_terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:905:#align stream.wseq.destruct_terminates_of_nth_terminates Stream'.WSeq.destruct_terminates_of_get?_terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:919:#align stream.wseq.mem_rec_on Stream'.WSeq.mem_rec_on
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:926:  · apply (Stream'.eq_or_mem_of_mem_cons h).resolve_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:929:  · apply Stream'.mem_cons_of_mem _ h
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:930:#align stream.wseq.mem_think Stream'.WSeq.mem_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:947:    refine' ⟨Stream'.eq_or_mem_of_mem_cons, fun o => _⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:950:        apply Stream'.mem_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:951:      · exact Stream'.mem_cons_of_mem _ m
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:953:#align stream.wseq.eq_or_mem_iff_mem Stream'.WSeq.eq_or_mem_iff_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:958:#align stream.wseq.mem_cons_iff Stream'.WSeq.mem_cons_iff
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:962:#align stream.wseq.mem_cons_of_mem Stream'.WSeq.mem_cons_of_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:966:#align stream.wseq.mem_cons Stream'.WSeq.mem_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:969:  intro h; have := h; cases' h with n e; revert s; simp [Stream'.nth]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:979:#align stream.wseq.mem_of_mem_tail Stream'.WSeq.mem_of_mem_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:984:#align stream.wseq.mem_of_mem_dropn Stream'.WSeq.mem_of_mem_dropn
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1000:#align stream.wseq.nth_mem Stream'.WSeq.get?_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1019:#align stream.wseq.exists_nth_of_mem Stream'.WSeq.exists_get?_of_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1034:#align stream.wseq.exists_dropn_of_mem Stream'.WSeq.exists_dropn_of_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1049:#align stream.wseq.lift_rel_dropn_destruct Stream'.WSeq.liftRel_dropn_destruct
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1060:#align stream.wseq.exists_of_lift_rel_left Stream'.WSeq.exists_of_liftRel_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1064:#align stream.wseq.exists_of_lift_rel_right Stream'.WSeq.exists_of_liftRel_right
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1069:#align stream.wseq.head_terminates_of_mem Stream'.WSeq.head_terminates_of_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1073:#align stream.wseq.of_mem_append Stream'.WSeq.of_mem_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1077:#align stream.wseq.mem_append_left Stream'.WSeq.mem_append_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1086:#align stream.wseq.exists_of_mem_map Stream'.WSeq.exists_of_mem_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1093:#align stream.wseq.lift_rel_nil Stream'.WSeq.liftRel_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1101:#align stream.wseq.lift_rel_cons Stream'.WSeq.liftRel_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1106:#align stream.wseq.lift_rel_think_left Stream'.WSeq.liftRel_think_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1111:#align stream.wseq.lift_rel_think_right Stream'.WSeq.liftRel_think_right
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1115:#align stream.wseq.cons_congr Stream'.WSeq.cons_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1118:#align stream.wseq.think_equiv Stream'.WSeq.think_equiv
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1122:#align stream.wseq.think_congr Stream'.WSeq.think_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1143:#align stream.wseq.head_congr Stream'.WSeq.head_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1151:#align stream.wseq.flatten_equiv Stream'.WSeq.flatten_equiv
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1166:#align stream.wseq.lift_rel_flatten Stream'.WSeq.liftRel_flatten
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1171:#align stream.wseq.flatten_congr Stream'.WSeq.flatten_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1187:#align stream.wseq.tail_congr Stream'.WSeq.tail_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1191:#align stream.wseq.dropn_congr Stream'.WSeq.dropn_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1195:#align stream.wseq.nth_congr Stream'.WSeq.get?_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1202:#align stream.wseq.mem_congr Stream'.WSeq.mem_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1206:#align stream.wseq.productive_congr Stream'.WSeq.productive_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1229:#align stream.wseq.equiv.ext Stream'.WSeq.Equiv.ext
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1251:#align stream.wseq.length_eq_map Stream'.WSeq.length_eq_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1256:#align stream.wseq.of_list_nil Stream'.WSeq.ofList_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1261:#align stream.wseq.of_list_cons Stream'.WSeq.ofList_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1271:#align stream.wseq.to_list'_nil Stream'.WSeq.toList'_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1286:#align stream.wseq.to_list'_cons Stream'.WSeq.toList'_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1301:#align stream.wseq.to_list'_think Stream'.WSeq.toList'_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1328:#align stream.wseq.to_list'_map Stream'.WSeq.toList'_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1333:#align stream.wseq.to_list_cons Stream'.WSeq.toList_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1338:#align stream.wseq.to_list_nil Stream'.WSeq.toList_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1342:#align stream.wseq.to_list_of_list Stream'.WSeq.toList_ofList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1355:#align stream.wseq.destruct_of_seq Stream'.WSeq.destruct_ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1360:#align stream.wseq.head_of_seq Stream'.WSeq.head_ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1366:#align stream.wseq.tail_of_seq Stream'.WSeq.tail_ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1374:#align stream.wseq.dropn_of_seq Stream'.WSeq.dropn_ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1378:#align stream.wseq.nth_of_seq Stream'.WSeq.get?_ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1382:#align stream.wseq.productive_of_seq Stream'.WSeq.productive_ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1388:#align stream.wseq.to_seq_of_seq Stream'.WSeq.toSeq_ofSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1393:#align stream.wseq.ret Stream'.WSeq.ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1398:#align stream.wseq.map_nil Stream'.WSeq.map_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1403:#align stream.wseq.map_cons Stream'.WSeq.map_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1408:#align stream.wseq.map_think Stream'.WSeq.map_think
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1412:#align stream.wseq.map_id Stream'.WSeq.map_id
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1416:#align stream.wseq.map_ret Stream'.WSeq.map_ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1421:#align stream.wseq.map_append Stream'.WSeq.map_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1427:#align stream.wseq.map_comp Stream'.WSeq.map_comp
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1431:#align stream.wseq.mem_map Stream'.WSeq.mem_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1468:#align stream.wseq.exists_of_mem_join Stream'.WSeq.exists_of_mem_join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1475:#align stream.wseq.exists_of_mem_bind Stream'.WSeq.exists_of_mem_bind
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1490:#align stream.wseq.destruct_map Stream'.WSeq.destruct_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1507:#align stream.wseq.lift_rel_map Stream'.WSeq.liftRel_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1511:#align stream.wseq.map_congr Stream'.WSeq.map_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1518:#align stream.wseq.destruct_append.aux Stream'.WSeq.destruct_append.aux
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1532:#align stream.wseq.destruct_append Stream'.WSeq.destruct_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1539:#align stream.wseq.destruct_join.aux Stream'.WSeq.destruct_join.aux
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1555:#align stream.wseq.destruct_join Stream'.WSeq.destruct_join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1584:#align stream.wseq.lift_rel_append Stream'.WSeq.liftRel_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1636:#align stream.wseq.lift_rel_join.lem Stream'.WSeq.liftRel_join.lem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1665:#align stream.wseq.lift_rel_join Stream'.WSeq.liftRel_join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1669:#align stream.wseq.join_congr Stream'.WSeq.join_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1675:#align stream.wseq.lift_rel_bind Stream'.WSeq.liftRel_bind
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1680:#align stream.wseq.bind_congr Stream'.WSeq.bind_congr
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1684:#align stream.wseq.join_ret Stream'.WSeq.join_ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1702:#align stream.wseq.join_map_ret Stream'.WSeq.join_map_ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1730:#align stream.wseq.join_append Stream'.WSeq.join_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1737:#align stream.wseq.bind_ret Stream'.WSeq.bind_ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1741:#align stream.wseq.ret_bind Stream'.WSeq.ret_bind
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1759:#align stream.wseq.map_join Stream'.WSeq.map_join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1793:#align stream.wseq.join_join Stream'.WSeq.join_join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1800:#align stream.wseq.bind_assoc Stream'.WSeq.bind_assoc
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1806:#align stream.wseq.monad Stream'.WSeq.monad
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/WSeq.lean:1824:end Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:22:namespace Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:33:def IsSeq {α : Type u} (s : Stream' (Option α)) : Prop :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:35:#align stream.is_seq Stream'.IsSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:41:  { f : Stream' (Option α) // f.IsSeq }
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:42:#align stream.seq Stream'.Seq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:47:#align stream.seq1 Stream'.Seq1
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:55:  ⟨Stream'.const none, fun {_} _ => rfl⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:56:#align stream.seq.nil Stream'.Seq.nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:67:#align stream.seq.cons Stream'.Seq.cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:72:#align stream.seq.val_cons Stream'.Seq.val_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:77:#align stream.seq.nth Stream'.Seq.get?
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:82:#align stream.seq.nth_mk Stream'.Seq.get?_mk
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:87:#align stream.seq.nth_nil Stream'.Seq.get?_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:92:#align stream.seq.nth_cons_zero Stream'.Seq.get?_cons_zero
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:97:#align stream.seq.nth_cons_succ Stream'.Seq.get?_cons_succ
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:102:#align stream.seq.ext Stream'.Seq.ext
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:107:#align stream.seq.cons_injective2 Stream'.Seq.cons_injective2
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:111:#align stream.seq.cons_left_injective Stream'.Seq.cons_left_injective
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:115:#align stream.seq.cons_right_injective Stream'.Seq.cons_right_injective
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:120:#align stream.seq.terminated_at Stream'.Seq.TerminatedAt
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:125:#align stream.seq.terminated_at_decidable Stream'.Seq.terminatedAtDecidable
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:130:#align stream.seq.terminates Stream'.Seq.Terminates
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:134:#align stream.seq.not_terminates_iff Stream'.Seq.not_terminates_iff
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:141:#align stream.seq.omap Stream'.Seq.omap
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:146:#align stream.seq.head Stream'.Seq.head
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:153:#align stream.seq.tail Stream'.Seq.tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:158:#align stream.seq.mem Stream'.Seq.Mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:167:#align stream.seq.le_stable Stream'.Seq.le_stable
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:172:#align stream.seq.terminated_stable Stream'.Seq.terminated_stable
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:182:#align stream.seq.ge_stable Stream'.Seq.ge_stable
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:185:#align stream.seq.not_mem_nil Stream'.Seq.not_mem_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:188:  | ⟨_, _⟩ => Stream'.mem_cons (some a) _
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:189:#align stream.seq.mem_cons Stream'.Seq.mem_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:192:  | ⟨_, _⟩ => Stream'.mem_cons_of_mem (some y)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:193:#align stream.seq.mem_cons_of_mem Stream'.Seq.mem_cons_of_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:196:  | ⟨f, al⟩, h => (Stream'.eq_or_mem_of_mem_cons h).imp_left fun h => by injection h
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:197:#align stream.seq.eq_or_mem_of_mem_cons Stream'.Seq.eq_or_mem_of_mem_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:202:#align stream.seq.mem_cons_iff Stream'.Seq.mem_cons_iff
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:208:#align stream.seq.destruct Stream'.Seq.destruct
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:218:#align stream.seq.destruct_eq_nil Stream'.Seq.destruct_eq_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:231:    exact (Stream'.eta f).symm
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:232:#align stream.seq.destruct_eq_cons Stream'.Seq.destruct_eq_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:237:#align stream.seq.destruct_nil Stream'.Seq.destruct_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:245:#align stream.seq.destruct_cons Stream'.Seq.destruct_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:250:#align stream.seq.head_eq_destruct Stream'.Seq.head_eq_destruct
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:255:#align stream.seq.head_nil Stream'.Seq.head_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:260:#align stream.seq.head_cons Stream'.Seq.head_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:265:#align stream.seq.tail_nil Stream'.Seq.tail_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:272:#align stream.seq.tail_cons Stream'.Seq.tail_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:277:#align stream.seq.nth_tail Stream'.Seq.get?_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:288:#align stream.seq.rec_on Stream'.Seq.recOn
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:292:  cases' M with k e; unfold Stream'.nth at e
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:308:#align stream.seq.mem_rec_on Stream'.Seq.mem_rec_on
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:318:#align stream.seq.corec.F Stream'.Seq.Corec.f
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:323:  refine' ⟨Stream'.corec' (Corec.f f) (some b), fun {n} h => _⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:324:  rw [Stream'.corec'_eq]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:325:  change Stream'.corec' (Corec.f f) (Corec.f f (some b)).2 n = none
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:337:  · rw [Stream'.corec'_eq (Corec.f f) (Corec.f f o).2, Stream'.corec'_eq (Corec.f f) o]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:339:#align stream.seq.corec Stream'.Seq.corec
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:346:  have h: Stream'.corec' (Corec.f f) (some b) 0 = (Corec.f f (some b)).1 := rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:354:  rw [Stream'.corec'_eq, Stream'.tail_cons]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:356:#align stream.seq.corec_eq Stream'.Seq.corec_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:369:#align stream.seq.bisim_o Stream'.Seq.BisimO
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:376:#align stream.seq.is_bisimulation Stream'.Seq.IsBisimulation
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:381:  apply Stream'.eq_of_bisim fun x y => ∃ s s' : Seq α, s.1 = x ∧ s'.1 = y ∧ R s s'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:382:  dsimp [Stream'.IsBisimulation]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:409:#align stream.seq.eq_of_bisim Stream'.Seq.eq_of_bisim
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:418:    Subtype.eq (Stream'.coinduction hh fun β fr => ht β fun s => fr s.1)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:419:#align stream.seq.coinduction Stream'.Seq.coinduction
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:430:#align stream.seq.coinduction2 Stream'.Seq.coinduction2
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:438:#align stream.seq.of_list Stream'.Seq.ofList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:442:#align stream.seq.coe_list Stream'.Seq.coeList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:447:#align stream.seq.of_list_nil Stream'.Seq.ofList_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:452:#align stream.seq.of_list_nth Stream'.Seq.ofList_nth
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:457:#align stream.seq.of_list_cons Stream'.Seq.ofList_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:461:def ofStream (s : Stream' α) : Seq α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:463:#align stream.seq.of_stream Stream'.Seq.ofStream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:465:instance coeStream : Coe (Stream' α) (Seq α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:467:#align stream.seq.coe_stream Stream'.Seq.coeStream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:477:#align stream.seq.of_lazy_list Stream'.Seq.ofLazyList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:481:#align stream.seq.coe_lazy_list Stream'.Seq.coeLazyList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:490:#align stream.seq.to_lazy_list Stream'.Seq.toLazyList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:496:#align stream.seq.force_to_list Stream'.Seq.forceToList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:500:  Stream'.nats
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:501:#align stream.seq.nats Stream'.Seq.nats
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:506:#align stream.seq.nats_nth Stream'.Seq.nats_get?
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:517:#align stream.seq.append Stream'.Seq.append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:523:      dsimp [Stream'.map, Stream'.nth]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:528:#align stream.seq.map Stream'.Seq.map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:544:#align stream.seq.join Stream'.Seq.join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:550:#align stream.seq.drop Stream'.Seq.drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:561:#align stream.seq.take Stream'.Seq.take
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:573:#align stream.seq.split_at Stream'.Seq.splitAt
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:581:#align stream.seq.zip_with Stream'.Seq.zipWith
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:589:#align stream.seq.nth_zip_with Stream'.Seq.get?_zipWith
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:596:#align stream.seq.zip Stream'.Seq.zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:601:#align stream.seq.nth_zip Stream'.Seq.get?_zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:606:#align stream.seq.unzip Stream'.Seq.unzip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:611:#align stream.seq.enum Stream'.Seq.enum
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:616:#align stream.seq.nth_enum Stream'.Seq.get?_enum
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:621:#align stream.seq.enum_nil Stream'.Seq.enum_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:626:#align stream.seq.to_list Stream'.Seq.toList
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:629:def toStream (s : Seq α) (h : ¬s.Terminates) : Stream' α := fun n =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:631:#align stream.seq.to_stream Stream'.Seq.toStream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:636:def toListOrStream (s : Seq α) [Decidable s.Terminates] : Sum (List α) (Stream' α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:638:#align stream.seq.to_list_or_stream Stream'.Seq.toListOrStream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:650:#align stream.seq.nil_append Stream'.Seq.nil_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:657:#align stream.seq.cons_append Stream'.Seq.cons_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:668:#align stream.seq.append_nil Stream'.Seq.append_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:687:#align stream.seq.append_assoc Stream'.Seq.append_assoc
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:692:#align stream.seq.map_nil Stream'.Seq.map_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:696:  | ⟨s, al⟩ => by apply Subtype.eq; dsimp [cons, map]; rw [Stream'.map_cons]; rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:697:#align stream.seq.map_cons Stream'.Seq.map_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:703:    rw [Option.map_id, Stream'.map_id]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:704:#align stream.seq.map_id Stream'.Seq.map_id
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:709:#align stream.seq.map_tail Stream'.Seq.map_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:714:    apply congr_arg fun f : _ → Option γ => Stream'.map f s
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:716:#align stream.seq.map_comp Stream'.Seq.map_comp
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:733:#align stream.seq.map_append Stream'.Seq.map_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:738:#align stream.seq.map_nth Stream'.Seq.map_get?
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:750:#align stream.seq.join_nil Stream'.Seq.join_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:755:#align stream.seq.join_cons_nil Stream'.Seq.join_cons_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:761:#align stream.seq.join_cons_cons Stream'.Seq.join_cons_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:783:#align stream.seq.join_cons Stream'.Seq.join_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:807:#align stream.seq.join_append Stream'.Seq.join_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:811:  apply Subtype.eq; simp [ofStream, cons]; rw [Stream'.map_cons]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:812:#align stream.seq.of_stream_cons Stream'.Seq.ofStream_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:817:#align stream.seq.of_list_append Stream'.Seq.ofList_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:820:theorem ofStream_append (l : List α) (s : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:822:  induction l <;> simp [*, Stream'.nil_append_stream, Stream'.cons_append_stream]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:823:#align stream.seq.of_stream_append Stream'.Seq.ofStream_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:835:#align stream.seq.to_list' Stream'.Seq.toList'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:840:#align stream.seq.dropn_add Stream'.Seq.dropn_add
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:844:#align stream.seq.dropn_tail Stream'.Seq.dropn_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:850:#align stream.seq.head_dropn Stream'.Seq.head_dropn
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:853:  | ⟨_, _⟩ => Stream'.mem_map (Option.map f)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:854:#align stream.seq.mem_map Stream'.Seq.mem_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:859:    let ⟨o, om, oe⟩ := @Stream'.exists_of_mem_map _ _ (Option.map f) (some b) g h
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:863:#align stream.seq.exists_of_mem_map Stream'.Seq.exists_of_mem_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:883:#align stream.seq.of_mem_append Stream'.Seq.of_mem_append
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:887:#align stream.seq.mem_append_left Stream'.Seq.mem_append_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:896:#align stream.seq.enum_cons Stream'.Seq.enum_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:904:open Stream'.Seq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:909:#align stream.seq1.to_seq Stream'.Seq1.toSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:913:#align stream.seq1.coe_seq Stream'.Seq1.coeSeq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:918:#align stream.seq1.map Stream'.Seq1.map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:925:#align stream.seq1.map_id Stream'.Seq1.map_id
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:933:#align stream.seq1.join Stream'.Seq1.join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:938:#align stream.seq1.join_nil Stream'.Seq1.join_nil
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:944:#align stream.seq1.join_cons Stream'.Seq1.join_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:950:#align stream.seq1.ret Stream'.Seq1.ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:961:#align stream.seq1.bind Stream'.Seq1.bind
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:966:#align stream.seq1.join_map_ret Stream'.Seq1.join_map_ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:975:#align stream.seq1.bind_ret Stream'.Seq1.bind_ret
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:982:#align stream.seq1.ret_bind Stream'.Seq1.ret_bind
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:1002:#align stream.seq1.map_join' Stream'.Seq1.map_join'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:1007:#align stream.seq1.map_join Stream'.Seq1.map_join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:1031:#align stream.seq1.join_join Stream'.Seq1.join_join
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:1050:#align stream.seq1.bind_assoc Stream'.Seq1.bind_assoc
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:1056:#align stream.seq1.monad Stream'.Seq1.monad
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:1063:#align stream.seq1.is_lawful_monad Stream'.Seq1.lawfulMonad
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Seq/Seq.lean:1067:end Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:12:# Definition of `Stream'` and functions on streams
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:14:A stream `Stream' α` is an infinite sequence of elements of `α`. One can also think about it as an
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:15:infinite list. In this file we define `Stream'` and some functions that take and/or return streams.
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:21:/-- A stream `Stream' α` is an infinite sequence of elements of `α`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:22:def Stream' (α : Type u) := ℕ → α
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:23:#align stream Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:25:namespace Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:28:def cons (a : α) (s : Stream' α) : Stream' α
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:31:#align stream.cons Stream'.cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:36:def nth (s : Stream' α) (n : ℕ) : α := s n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:37:#align stream.nth Stream'.nth
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:39:/-- Head of a stream: `Stream'.head s = Stream'.nth s 0`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:40:abbrev head (s : Stream' α) : α := s.nth 0
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:41:#align stream.head Stream'.head
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:43:/-- Tail of a stream: `Stream'.tail (h :: t) = t`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:44:def tail (s : Stream' α) : Stream' α := fun i => s.nth (i + 1)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:45:#align stream.tail Stream'.tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:48:def drop (n : Nat) (s : Stream' α) : Stream' α := fun i => s.nth (i + n)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:49:#align stream.drop Stream'.drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:52:def All (p : α → Prop) (s : Stream' α) := ∀ n, p (nth s n)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:53:#align stream.all Stream'.All
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:56:def Any (p : α → Prop) (s : Stream' α) := ∃ n, p (nth s n)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:57:#align stream.any Stream'.Any
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:59:/-- `a ∈ s` means that `a = Stream'.nth n s` for some `n`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:60:instance : Membership α (Stream' α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:64:def map (f : α → β) (s : Stream' α) : Stream' β := fun n => f (nth s n)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:65:#align stream.map Stream'.map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:68:`Stream'.nth n (Stream'.zip f s₁ s₂) = f (Stream'.nth s₁) (Stream'.nth s₂)`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:69:def zip (f : α → β → δ) (s₁ : Stream' α) (s₂ : Stream' β) : Stream' δ :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:71:#align stream.zip Stream'.zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:74:def enum (s : Stream' α) : Stream' (ℕ × α) := fun n => (n, s.nth n)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:75:#align stream.enum Stream'.enum
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:77:/-- The constant stream: `Stream'.nth n (Stream'.const a) = a`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:78:def const (a : α) : Stream' α := fun _ => a
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:79:#align stream.const Stream'.const
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:83:def iterate (f : α → α) (a : α) : Stream' α
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:86:#align stream.iterate Stream'.iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:88:def corec (f : α → β) (g : α → α) : α → Stream' β := fun a => map f (iterate g a)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:89:#align stream.corec Stream'.corec
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:91:def corecOn (a : α) (f : α → β) (g : α → α) : Stream' β :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:93:#align stream.corec_on Stream'.corecOn
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:95:def corec' (f : α → β × α) : α → Stream' β :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:97:#align stream.corec' Stream'.corec'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:103:def corecState {σ α} (cmd : StateM σ α) (s : σ) : Stream' α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:105:#align stream.corec_state Stream'.corecState
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:108:abbrev unfolds (g : α → β) (f : α → α) (a : α) : Stream' β :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:110:#align stream.unfolds Stream'.unfolds
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:113:def interleave (s₁ s₂ : Stream' α) : Stream' α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:115:#align stream.interleave Stream'.interleave
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:120:def even (s : Stream' α) : Stream' α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:122:#align stream.even Stream'.even
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:125:def odd (s : Stream' α) : Stream' α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:127:#align stream.odd Stream'.odd
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:130:def appendStream' : List α → Stream' α → Stream' α
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:133:#align stream.append_stream Stream'.appendStream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:138:def take : ℕ → Stream' α → List α
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:141:#align stream.take Stream'.take
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:143:/-- An auxiliary definition for `Stream'.cycle` corecursive def -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:146:#align stream.cycle_f Stream'.cycleF
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:148:/-- An auxiliary definition for `Stream'.cycle` corecursive def -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:152:#align stream.cycle_g Stream'.cycleG
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:155:def cycle : ∀ l : List α, l ≠ [] → Stream' α
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:157:  | List.cons a l, _ => corec Stream'.cycleF Stream'.cycleG (a, l, a, l)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:158:#align stream.cycle Stream'.cycle
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:160:/-- Tails of a stream, starting with `Stream'.tail s`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:161:def tails (s : Stream' α) : Stream' (Stream' α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:163:#align stream.tails Stream'.tails
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:165:/-- An auxiliary definition for `Stream'.inits`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:166:def initsCore (l : List α) (s : Stream' α) : Stream' (List α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:170:#align stream.inits_core Stream'.initsCore
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:173:def inits (s : Stream' α) : Stream' (List α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:175:#align stream.inits Stream'.inits
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:177:/-- A constant stream, same as `Stream'.const`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:178:def pure (a : α) : Stream' α :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:180:#align stream.pure Stream'.pure
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:183:def apply (f : Stream' (α → β)) (s : Stream' α) : Stream' β := fun n => (nth f n) (nth s n)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:184:#align stream.apply Stream'.apply
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:189:/-- The stream of natural numbers: `Stream'.nth n Stream'.nats = n`. -/
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:190:def nats : Stream' Nat := fun n => n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:191:#align stream.nats Stream'.nats
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Defs.lean:193:end Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:25:namespace Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:29:instance [Inhabited α] : Inhabited (Stream' α) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:30:  ⟨Stream'.const default⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:32:protected theorem eta (s : Stream' α) : (head s::tail s) = s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:34:#align stream.eta Stream'.eta
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:37:protected theorem ext {s₁ s₂ : Stream' α} : (∀ n, nth s₁ n = nth s₂ n) → s₁ = s₂ :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:39:#align stream.ext Stream'.ext
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:42:theorem nth_zero_cons (a : α) (s : Stream' α) : nth (a::s) 0 = a :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:44:#align stream.nth_zero_cons Stream'.nth_zero_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:47:theorem head_cons (a : α) (s : Stream' α) : head (a::s) = a :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:49:#align stream.head_cons Stream'.head_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:52:theorem tail_cons (a : α) (s : Stream' α) : tail (a::s) = s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:54:#align stream.tail_cons Stream'.tail_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:57:theorem nth_drop (n m : Nat) (s : Stream' α) : nth (drop m s) n = nth s (n + m) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:59:#align stream.nth_drop Stream'.nth_drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:61:theorem tail_eq_drop (s : Stream' α) : tail s = drop 1 s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:63:#align stream.tail_eq_drop Stream'.tail_eq_drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:66:theorem drop_drop (n m : Nat) (s : Stream' α) : drop n (drop m s) = drop (n + m) s := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:68:#align stream.drop_drop Stream'.drop_drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:70:@[simp] theorem nth_tail {s : Stream' α} : s.tail.nth n = s.nth (n + 1) := rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:72:@[simp] theorem tail_drop' {s : Stream' α} : tail (drop i s) = s.drop (i+1) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:75:@[simp] theorem drop_tail' {s : Stream' α} : drop i (tail s) = s.drop (i+1) := rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:77:theorem tail_drop (n : Nat) (s : Stream' α) : tail (drop n s) = drop n (tail s) := by simp
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:78:#align stream.tail_drop Stream'.tail_drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:80:theorem nth_succ (n : Nat) (s : Stream' α) : nth s (succ n) = nth (tail s) n :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:82:#align stream.nth_succ Stream'.nth_succ
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:85:theorem nth_succ_cons (n : Nat) (s : Stream' α) (x : α) : nth (x::s) n.succ = nth s n :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:87:#align stream.nth_succ_cons Stream'.nth_succ_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:89:@[simp] theorem drop_zero {s : Stream' α} : s.drop 0 = s := rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:91:theorem drop_succ (n : Nat) (s : Stream' α) : drop (succ n) s = drop n (tail s) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:93:#align stream.drop_succ Stream'.drop_succ
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:95:theorem head_drop (a : Stream' α) (n : ℕ) : (a.drop n).head = a.nth n := by simp
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:96:#align stream.head_drop Stream'.head_drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:98:theorem cons_injective2 : Function.Injective2 (cons : α → Stream' α → Stream' α) := fun x y s t h =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:100:    Stream'.ext fun n => by rw [← nth_succ_cons n _ x, h, nth_succ_cons]⟩
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:101:#align stream.cons_injective2 Stream'.cons_injective2
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:103:theorem cons_injective_left (s : Stream' α) : Function.Injective fun x => cons x s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:105:#align stream.cons_injective_left Stream'.cons_injective_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:109:#align stream.cons_injective_right Stream'.cons_injective_right
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:111:theorem all_def (p : α → Prop) (s : Stream' α) : All p s = ∀ n, p (nth s n) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:113:#align stream.all_def Stream'.all_def
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:115:theorem any_def (p : α → Prop) (s : Stream' α) : Any p s = ∃ n, p (nth s n) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:117:#align stream.any_def Stream'.any_def
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:120:theorem mem_cons (a : α) (s : Stream' α) : a ∈ a::s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:122:#align stream.mem_cons Stream'.mem_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:124:theorem mem_cons_of_mem {a : α} {s : Stream' α} (b : α) : a ∈ s → a ∈ b::s := fun ⟨n, h⟩ =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:126:#align stream.mem_cons_of_mem Stream'.mem_cons_of_mem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:128:theorem eq_or_mem_of_mem_cons {a b : α} {s : Stream' α} : (a ∈ b::s) → a = b ∨ a ∈ s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:136:#align stream.eq_or_mem_of_mem_cons Stream'.eq_or_mem_of_mem_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:138:theorem mem_of_nth_eq {n : Nat} {s : Stream' α} {a : α} : a = nth s n → a ∈ s := fun h =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:140:#align stream.mem_of_nth_eq Stream'.mem_of_nth_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:146:theorem drop_map (n : Nat) (s : Stream' α) : drop n (map f s) = map f (drop n s) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:147:  Stream'.ext fun _ => rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:148:#align stream.drop_map Stream'.drop_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:151:theorem nth_map (n : Nat) (s : Stream' α) : nth (map f s) n = f (nth s n) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:153:#align stream.nth_map Stream'.nth_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:155:theorem tail_map (s : Stream' α) : tail (map f s) = map f (tail s) := rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:156:#align stream.tail_map Stream'.tail_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:159:theorem head_map (s : Stream' α) : head (map f s) = f (head s) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:161:#align stream.head_map Stream'.head_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:163:theorem map_eq (s : Stream' α) : map f s = f (head s)::map f (tail s) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:164:  rw [← Stream'.eta (map f s), tail_map, head_map]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:165:#align stream.map_eq Stream'.map_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:167:theorem map_cons (a : α) (s : Stream' α) : map f (a::s) = f a::map f s := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:168:  rw [← Stream'.eta (map f (a::s)), map_eq]; rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:169:#align stream.map_cons Stream'.map_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:172:theorem map_id (s : Stream' α) : map id s = s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:174:#align stream.map_id Stream'.map_id
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:177:theorem map_map (g : β → δ) (f : α → β) (s : Stream' α) : map g (map f s) = map (g ∘ f) s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:179:#align stream.map_map Stream'.map_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:182:theorem map_tail (s : Stream' α) : map f (tail s) = tail (map f s) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:184:#align stream.map_tail Stream'.map_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:186:theorem mem_map {a : α} {s : Stream' α} : a ∈ s → f a ∈ map f s := fun ⟨n, h⟩ =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:188:#align stream.mem_map Stream'.mem_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:190:theorem exists_of_mem_map {f} {b : β} {s : Stream' α} : b ∈ map f s → ∃ a, a ∈ s ∧ f a = b :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:192:#align stream.exists_of_mem_map Stream'.exists_of_mem_map
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:200:theorem drop_zip (n : Nat) (s₁ : Stream' α) (s₂ : Stream' β) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:202:  Stream'.ext fun _ => rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:203:#align stream.drop_zip Stream'.drop_zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:206:theorem nth_zip (n : Nat) (s₁ : Stream' α) (s₂ : Stream' β) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:209:#align stream.nth_zip Stream'.nth_zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:211:theorem head_zip (s₁ : Stream' α) (s₂ : Stream' β) : head (zip f s₁ s₂) = f (head s₁) (head s₂) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:213:#align stream.head_zip Stream'.head_zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:215:theorem tail_zip (s₁ : Stream' α) (s₂ : Stream' β) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:218:#align stream.tail_zip Stream'.tail_zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:220:theorem zip_eq (s₁ : Stream' α) (s₂ : Stream' β) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:222:  rw [← Stream'.eta (zip f s₁ s₂)]; rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:223:#align stream.zip_eq Stream'.zip_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:226:theorem nth_enum (s : Stream' α) (n : ℕ) : nth (enum s) n = (n, s.nth n) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:228:#align stream.nth_enum Stream'.nth_enum
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:230:theorem enum_eq_zip (s : Stream' α) : enum s = zip Prod.mk nats s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:232:#align stream.enum_eq_zip Stream'.enum_eq_zip
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:239:#align stream.mem_const Stream'.mem_const
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:242:  apply Stream'.ext; intro n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:244:#align stream.const_eq Stream'.const_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:250:#align stream.tail_const Stream'.tail_const
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:255:#align stream.map_const Stream'.map_const
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:260:#align stream.nth_const Stream'.nth_const
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:264:  Stream'.ext fun _ => rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:265:#align stream.drop_const Stream'.drop_const
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:270:#align stream.head_iterate Stream'.head_iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:281:#align stream.tail_iterate Stream'.tail_iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:284:  rw [← Stream'.eta (iterate f a)]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:286:#align stream.iterate_eq Stream'.iterate_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:291:#align stream.nth_zero_iterate Stream'.nth_zero_iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:295:#align stream.nth_succ_iterate Stream'.nth_succ_iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:299:variable (R : Stream' α → Stream' α → Prop)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:309:#align stream.is_bisimulation Stream'.IsBisimulation
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:317:#align stream.nth_of_bisim Stream'.nth_of_bisim
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:321:  Stream'.ext fun n => And.left (nth_of_bisim R bisim n r)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:322:#align stream.eq_of_bisim Stream'.eq_of_bisim
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:326:theorem bisim_simple (s₁ s₂ : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:333:#align stream.bisim_simple Stream'.bisim_simple
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:335:theorem coinduction {s₁ s₂ : Stream' α} :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:337:      (∀ (β : Type u) (fr : Stream' α → β),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:343:        ∀ (β : Type u) (fr : Stream' α → β), fr s₁ = fr s₂ → fr (tail s₁) = fr (tail s₂))
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:348:        ∀ (β : Type u) (fr : Stream' α → β),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:353:#align stream.coinduction Stream'.coinduction
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:358:#align stream.iterate_id Stream'.iterate_id
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:368:#align stream.map_iterate Stream'.map_iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:374:#align stream.corec_def Stream'.corec_def
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:378:#align stream.corec_eq Stream'.corec_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:382:#align stream.corec_id_id_eq_const Stream'.corec_id_id_eq_const
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:386:#align stream.corec_id_f_eq_iterate Stream'.corec_id_f_eq_iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:394:#align stream.corec'_eq Stream'.corec'_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:400:#align stream.unfolds_eq Stream'.unfolds_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:402:theorem nth_unfolds_head_tail : ∀ (n : Nat) (s : Stream' α),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:409:#align stream.nth_unfolds_head_tail Stream'.nth_unfolds_head_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:411:theorem unfolds_head_eq : ∀ s : Stream' α, unfolds head tail s = s := fun s =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:412:  Stream'.ext fun n => nth_unfolds_head_tail n s
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:413:#align stream.unfolds_head_eq Stream'.unfolds_head_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:415:theorem interleave_eq (s₁ s₂ : Stream' α) : s₁ ⋈ s₂ = head s₁::head s₂::(tail s₁ ⋈ tail s₂) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:419:#align stream.interleave_eq Stream'.interleave_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:421:theorem tail_interleave (s₁ s₂ : Stream' α) : tail (s₁ ⋈ s₂) = s₂ ⋈ tail s₁ := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:423:#align stream.tail_interleave Stream'.tail_interleave
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:425:theorem interleave_tail_tail (s₁ s₂ : Stream' α) : tail s₁ ⋈ tail s₂ = tail (tail (s₁ ⋈ s₂)) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:427:#align stream.interleave_tail_tail Stream'.interleave_tail_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:429:theorem nth_interleave_left : ∀ (n : Nat) (s₁ s₂ : Stream' α),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:438:#align stream.nth_interleave_left Stream'.nth_interleave_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:440:theorem nth_interleave_right : ∀ (n : Nat) (s₁ s₂ : Stream' α),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:448:#align stream.nth_interleave_right Stream'.nth_interleave_right
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:450:theorem mem_interleave_left {a : α} {s₁ : Stream' α} (s₂ : Stream' α) : a ∈ s₁ → a ∈ s₁ ⋈ s₂ :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:452:#align stream.mem_interleave_left Stream'.mem_interleave_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:454:theorem mem_interleave_right {a : α} {s₁ : Stream' α} (s₂ : Stream' α) : a ∈ s₂ → a ∈ s₁ ⋈ s₂ :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:456:#align stream.mem_interleave_right Stream'.mem_interleave_right
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:458:theorem odd_eq (s : Stream' α) : odd s = even (tail s) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:460:#align stream.odd_eq Stream'.odd_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:463:theorem head_even (s : Stream' α) : head (even s) = head s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:465:#align stream.head_even Stream'.head_even
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:467:theorem tail_even (s : Stream' α) : tail (even s) = even (tail (tail s)) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:471:#align stream.tail_even Stream'.tail_even
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:473:theorem even_cons_cons (a₁ a₂ : α) (s : Stream' α) : even (a₁::a₂::s) = a₁::even s := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:476:#align stream.even_cons_cons Stream'.even_cons_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:478:theorem even_tail (s : Stream' α) : even (tail s) = odd s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:480:#align stream.even_tail Stream'.even_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:482:theorem even_interleave (s₁ s₂ : Stream' α) : even (s₁ ⋈ s₂) = s₁ :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:490:#align stream.even_interleave Stream'.even_interleave
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:492:theorem interleave_even_odd (s₁ : Stream' α) : even s₁ ⋈ odd s₁ = s₁ :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:499:#align stream.interleave_even_odd Stream'.interleave_even_odd
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:501:theorem nth_even : ∀ (n : Nat) (s : Stream' α), nth (even s) n = nth s (2 * n)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:506:#align stream.nth_even Stream'.nth_even
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:508:theorem nth_odd : ∀ (n : Nat) (s : Stream' α), nth (odd s) n = nth s (2 * n + 1) := fun n s => by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:510:#align stream.nth_odd Stream'.nth_odd
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:512:theorem mem_of_mem_even (a : α) (s : Stream' α) : a ∈ even s → a ∈ s := fun ⟨n, h⟩ =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:514:#align stream.mem_of_mem_even Stream'.mem_of_mem_even
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:516:theorem mem_of_mem_odd (a : α) (s : Stream' α) : a ∈ odd s → a ∈ s := fun ⟨n, h⟩ =>
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:518:#align stream.mem_of_mem_odd Stream'.mem_of_mem_odd
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:520:theorem nil_append_stream (s : Stream' α) : appendStream' [] s = s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:522:#align stream.nil_append_stream Stream'.nil_append_stream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:524:theorem cons_append_stream (a : α) (l : List α) (s : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:527:#align stream.cons_append_stream Stream'.cons_append_stream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:529:theorem append_append_stream : ∀ (l₁ l₂ : List α) (s : Stream' α),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:534:#align stream.append_append_stream Stream'.append_append_stream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:537:    ∀ (l : List α) (s : Stream' α), map f (l ++ₛ s) = List.map f l ++ₛ map f s
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:541:#align stream.map_append_stream Stream'.map_append_stream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:543:theorem drop_append_stream : ∀ (l : List α) (s : Stream' α), drop l.length (l ++ₛ s) = s
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:547:#align stream.drop_append_stream Stream'.drop_append_stream
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:549:theorem append_stream_head_tail (s : Stream' α) : [head s] ++ₛ tail s = s := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:550:  rw [cons_append_stream, nil_append_stream, Stream'.eta]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:551:#align stream.append_stream_head_tail Stream'.append_stream_head_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:553:theorem mem_append_stream_right : ∀ {a : α} (l : List α) {s : Stream' α}, a ∈ s → a ∈ l ++ₛ s
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:558:#align stream.mem_append_stream_right Stream'.mem_append_stream_right
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:560:theorem mem_append_stream_left : ∀ {a : α} {l : List α} (s : Stream' α), a ∈ l → a ∈ l ++ₛ s
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:565:#align stream.mem_append_stream_left Stream'.mem_append_stream_left
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:568:theorem take_zero (s : Stream' α) : take 0 s = [] :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:570:#align stream.take_zero Stream'.take_zero
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:575:theorem take_succ (n : Nat) (s : Stream' α) : take (succ n) s = head s::take n (tail s) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:577:#align stream.take_succ Stream'.take_succ
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:579:@[simp] theorem take_succ_cons (n : Nat) (s : Stream' α) : take (n+1) (a::s) = a :: take n s := rfl
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:581:theorem take_succ' {s : Stream' α} : ∀ n, s.take (n+1) = s.take n ++ [s.nth n]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:586:theorem length_take (n : ℕ) (s : Stream' α) : (take n s).length = n := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:588:#align stream.length_take Stream'.length_take
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:591:theorem take_take {s : Stream' α} : ∀ {m n}, (s.take n).take m = s.take (min n m)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:596:@[simp] theorem concat_take_nth {s : Stream' α} : s.take n ++ [s.nth n] = s.take (n+1) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:599:theorem get?_take {s : Stream' α} : ∀ {k n}, k < n → (s.take n).get? k = s.nth k
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:603:theorem get?_take_succ (n : Nat) (s : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:606:#align stream.nth_take_succ Stream'.get?_take_succ
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:608:@[simp] theorem dropLast_take {xs : Stream' α} :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:609:    (Stream'.take n xs).dropLast = Stream'.take (n-1) xs := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:614:theorem append_take_drop : ∀ (n : Nat) (s : Stream' α),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:621:    rw [take_succ, drop_succ, cons_append_stream, ih (tail s), Stream'.eta]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:622:#align stream.append_take_drop Stream'.append_take_drop
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:626:theorem take_theorem (s₁ s₂ : Stream' α) : (∀ n : Nat, take n s₁ = take n s₂) → s₁ = s₂ := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:627:  intro h; apply Stream'.ext; intro n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:635:#align stream.take_theorem Stream'.take_theorem
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:638:    Stream'.cycleG (a, a₁::l₁, a₀, l₀) = (a₁, l₁, a₀, l₀) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:640:#align stream.cycle_g_cons Stream'.cycle_g_cons
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:645:    have gen : ∀ l' a', corec Stream'.cycleF Stream'.cycleG (a', l', a, l) =
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:646:        (a'::l') ++ₛ corec Stream'.cycleF Stream'.cycleG (a, l, a, l) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:653:        rw [corec_eq, Stream'.cycle_g_cons, ih a₁]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:656:#align stream.cycle_eq Stream'.cycle_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:660:#align stream.mem_cycle Stream'.mem_cycle
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:665:#align stream.cycle_singleton Stream'.cycle_singleton
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:667:theorem tails_eq (s : Stream' α) : tails s = tail s::tails (tail s) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:669:#align stream.tails_eq Stream'.tails_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:672:theorem nth_tails : ∀ (n : Nat) (s : Stream' α), nth (tails s) n = drop n (tail s) := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:678:#align stream.nth_tails Stream'.nth_tails
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:680:theorem tails_eq_iterate (s : Stream' α) : tails s = iterate tail (tail s) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:682:#align stream.tails_eq_iterate Stream'.tails_eq_iterate
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:684:theorem inits_core_eq (l : List α) (s : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:688:#align stream.inits_core_eq Stream'.inits_core_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:690:theorem tail_inits (s : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:694:#align stream.tail_inits Stream'.tail_inits
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:696:theorem inits_tail (s : Stream' α) : inits (tail s) = initsCore [head (tail s)] (tail (tail s)) :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:698:#align stream.inits_tail Stream'.inits_tail
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:701:    ∀ (a : α) (n : Nat) (l : List α) (s : Stream' α),
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:710:#align stream.cons_nth_inits_core Stream'.cons_nth_inits_core
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:713:theorem nth_inits : ∀ (n : Nat) (s : Stream' α), nth (inits s) n = take (succ n) s := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:719:#align stream.nth_inits Stream'.nth_inits
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:721:theorem inits_eq (s : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:723:  apply Stream'.ext; intro n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:728:#align stream.inits_eq Stream'.inits_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:730:theorem zip_inits_tails (s : Stream' α) : zip appendStream' (inits s) (tails s) = const s := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:731:  apply Stream'.ext; intro n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:733:    Stream'.eta]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:734:#align stream.zip_inits_tails Stream'.zip_inits_tails
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:736:theorem identity (s : Stream' α) : pure id ⊛ s = s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:738:#align stream.identity Stream'.identity
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:740:theorem composition (g : Stream' (β → δ)) (f : Stream' (α → β)) (s : Stream' α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:743:#align stream.composition Stream'.composition
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:747:#align stream.homomorphism Stream'.homomorphism
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:749:theorem interchange (fs : Stream' (α → β)) (a : α) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:752:#align stream.interchange Stream'.interchange
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:754:theorem map_eq_apply (f : α → β) (s : Stream' α) : map f s = pure f ⊛ s :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:756:#align stream.map_eq_apply Stream'.map_eq_apply
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:760:#align stream.nth_nats Stream'.nth_nats
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:763:  apply Stream'.ext; intro n
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:765:#align stream.nats_eq Stream'.nats_eq
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Data/Stream/Init.lean:767:end Stream'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:97:inductive FS {M} [AddSemigroup M] : Stream' M → Set M
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:98:  | head (a : Stream' M) : FS a a.head
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:99:  | tail (a : Stream' M) (m : M) (h : FS a.tail m) : FS a m
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:100:  | cons (a : Stream' M) (m : M) (h : FS a.tail m) : FS a (a.head + m)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:107:inductive FP {M} [Semigroup M] : Stream' M → Set M
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:108:  | head (a : Stream' M) : FP a a.head
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:109:  | tail (a : Stream' M) (m : M) (h : FP a.tail m) : FP a m
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:110:  | cons (a : Stream' M) (m : M) (h : FP a.tail m) : FP a (a.head * m)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:119:theorem FP.mul {M} [Semigroup M] {a : Stream' M} {m : M} (hm : m ∈ FP a) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:138:theorem exists_idempotent_ultrafilter_le_FP {M} [Semigroup M] (a : Stream' M) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:149:      rw [add_comm, ← Stream'.drop_drop, ← Stream'.tail_eq_drop]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:167:    simpa only [Stream'.drop_drop] using hm'
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:190:  use Stream'.corec elem succ (Subtype.mk s₀ sU)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:191:  suffices ∀ (a : Stream' M), ∀ m ∈ FP a, ∀ p, a = Stream'.corec elem succ p → m ∈ p.val by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:198:    rw [Stream'.corec_eq, Stream'.head_cons]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:202:    rw [Stream'.corec_eq, Stream'.tail_cons]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:206:    rw [Stream'.corec_eq, Stream'.tail_cons]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:217:theorem FP_partition_regular {M} [Semigroup M] (a : Stream' M) (s : Set (Set M)) (sfin : s.Finite)
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:218:    (scov : FP a ⊆ ⋃₀ s) : ∃ c ∈ s, ∃ b : Stream' M, FP b ⊆ c :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:233:    (scov : ⊤ ⊆ ⋃₀ s) : ∃ c ∈ s, ∃ a : Stream' M, FP a ⊆ c :=
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:244:theorem FP_drop_subset_FP {M} [Semigroup M] (a : Stream' M) (n : ℕ) : FP (a.drop n) ⊆ FP a := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:247:  rw [Nat.succ_eq_one_add, ← Stream'.drop_drop]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:255:theorem FP.singleton {M} [Semigroup M] (a : Stream' M) (i : ℕ) : a.nth i ∈ FP a := by
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:266:theorem FP.mul_two {M} [Semigroup M] (a : Stream' M) (i j : ℕ) (ij : i < j) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:269:  rw [← Stream'.head_drop]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:275:  rw [Stream'.tail_eq_drop, Stream'.nth_drop, Stream'.nth_drop] at this
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:284:theorem FP.finset_prod {M} [CommMonoid M] (a : Stream' M) (s : Finset ℕ) (hs : s.Nonempty) :
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:288:  rw [← Finset.mul_prod_erase _ _ (s.min'_mem hs), ← Stream'.head_drop]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:293:    rw [Stream'.tail_eq_drop, Stream'.drop_drop, add_comm]
+/home/luigi/source/FormalMAA302/FormalMAA302/lake-packages/mathlib/Mathlib/Combinatorics/Hindman.lean:298:    rw [hd, add_comm, ← Stream'.drop_drop]
