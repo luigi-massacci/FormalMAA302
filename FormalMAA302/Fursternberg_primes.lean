@@ -80,12 +80,61 @@ lemma O_is_openInter : ∀ U V : Set ℤ , U ∈ O → V ∈ O → U ∩ V ∈ O
   assumption
 
 
-lemma infinite_s (a b : ℤ): Set.Infinite (S a b) := by
+lemma infinite_s (a b : ℤ) (ha : 1 ≤ a ) : Set.Infinite (S a b) := by
   refine Set.infinite_of_not_bddAbove ?_
   intro h
   cases' h with w hw
-  have : a*w + b ∈ S a b := by
-    simp [S]
-  by_cases h : 0 < b
-  sorry
-  sorry
+  simp at hw
+  unfold upperBounds at hw
+  simp at hw
+  by_cases wpos : 0 < w
+  · have : w ≤ a*w := by
+      nth_rewrite 1 [← one_mul w]
+      apply mul_le_mul (ha) (le_refl w) <;> linarith
+    by_cases bpos : 0 < b
+    · have : a*w + b ∈ S a b := by simp [S]
+      specialize hw this
+      have : a*w < a*w + b := by
+        apply (lt_add_iff_pos_right (a*w)).mpr bpos
+      linarith
+    · push_neg at bpos
+      have : a*(w - b + 1) + b ∈ S a b:= by simp [S]
+      specialize hw this
+      have : -b ≤ a*(-b) := by
+        nth_rewrite 1 [← one_mul (-b)]
+        apply mul_le_mul
+        assumption
+        rfl
+        linarith
+        linarith
+      have : 0 ≤ a*(-b) + b := by linarith
+      have : w <  a*(w - b + 1) := by
+        linarith
+      linarith
+  push_neg at wpos
+  by_cases bpos : 0 < b
+  · have : b ∈ S a b := by simp [S]
+    specialize hw this
+    linarith
+  push_neg at bpos
+  have : a*(-w - b + 1) + b ∈ S a b:= by simp [S]
+  specialize hw this
+  have : 0 ≤ -w := by
+    linarith
+  have : 0 ≤ a := by linarith
+  have : 0 ≤ a * (-w) := by
+    rw [← one_mul 0]
+    apply mul_le_mul <;> linarith
+  have : w ≤ a * (-w) := by linarith
+  have : 0 ≤ -b := by
+      linarith
+  have : 0 ≤ a * (-b) := by
+    rw [← one_mul 0]
+    apply mul_le_mul <;> linarith
+  have : -b ≤ a * (-b):= by
+    nth_rewrite 1 [← one_mul (-b)]
+    apply mul_le_mul <;> linarith
+  have : 0 ≤ a * (-b) + b := by linarith
+  have : w < a*(-w - b + 1) + b := by
+    linarith
+  linarith
