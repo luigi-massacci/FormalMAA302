@@ -9,16 +9,7 @@ def S (a b : ℤ) := {a} * (⊤ : Set ℤ) + {b}
 
 
 example (n : ℤ) : Even n ↔  n ∈ S 2 0 := by
-  constructor
-  · intro h
-    simp [S]
-    rcases h with ⟨k, hk⟩
-    rw [hk]
-    ring_nf
-    simp
-  · intro h
-    simp [S] at h
-    assumption
+  constructor <;> simp [S]
 
 def O : Set (Set ℤ) := {∅} ∪ { U | ∀n ∈ U, ∃ m : ℤ, 1 ≤ m ∧ S m n ⊆ U}
 
@@ -34,51 +25,38 @@ lemma O_is_openZ : Set.univ ∈ O := by
 
 
 lemma O_isOpen_sUnion : ∀ C : Set (Set ℤ), (∀ (U : Set ℤ), U ∈ C → U ∈ O) → (⋃₀ C) ∈ O := by
-  intro C hC
   simp [O]
-  intro n S S_inC n_inS
-  specialize hC _ S_inC
-  simp [O] at hC
-  rcases hC n n_inS with ⟨m, hm, h_sub⟩
+  intro C hC n S S_in_C n_in_S
+  rcases hC _ S_in_C _ n_in_S with ⟨m, one_le_m, Smn_in_S⟩
   use m
-  refine ⟨hm, ?_⟩
-  intro k hk
-  rw [Set.mem_sUnion]
+  refine ⟨one_le_m, ?_⟩
+  intro k k_in_Smn
   use S
-  refine ⟨S_inC, ?_⟩
-  apply subset_trans h_sub
-  rfl
-  assumption
-
+  refine ⟨S_in_C, ?_⟩
+  apply subset_trans Smn_in_S <;> tauto
 
 lemma O_is_openInter : ∀ U V : Set ℤ , U ∈ O → V ∈ O → U ∩ V ∈ O:= by
   simp [O]
-  intro U V hU hV n nU nV
-  rcases hU n nU with ⟨u, hu⟩
-  rcases hV n nV with ⟨v, hv⟩
+  intro U V hU hV n n_in_U n_in_V
+  rcases hU _ n_in_U with ⟨u, hu⟩
+  rcases hV _ n_in_V with ⟨v, hv⟩
   use u*v
   constructor
-  rw [← one_mul 1]
-  have : 0 ≤ u := by
-    apply le_trans
-    exact ((show 0 ≤ 1 by norm_num))
-    exact hu.1
-  apply mul_le_mul (hu.1) (hv.1) (by norm_num) this
-  simp [S]
+  · exact one_le_mul_of_one_le_of_one_le hu.1 hv.1 --exact?
   constructor
-  refine subset_trans ?_ hu.2
-  simp [S]
-  intro a ⟨k, hk⟩
-  use v*k
-  ring_nf
-  assumption
-  refine subset_trans ?_ hv.2
-  simp [S]
-  intro a ⟨k, hk⟩
-  use u*k
-  ring_nf
-  rw [mul_comm v u]
-  assumption
+  · refine subset_trans ?_ hu.2
+    simp [S]
+    intro a ⟨k, hk⟩
+    use v*k
+    ring_nf
+    assumption
+  · refine subset_trans ?_ hv.2
+    simp [S]
+    intro a ⟨k, hk⟩
+    use u*k
+    ring_nf
+    rw [mul_comm v u]
+    assumption
 
 
 instance SequenceTopology : TopologicalSpace ℤ
@@ -151,8 +129,8 @@ open Topology
 
 #check IsClopen
 
-lemma infinite_of_open (s : Set ℤ): SequenceTopology.IsOpen s → Set.Nonempty s → Set.Infinite s := by
-  intro open_s nonemptys
+lemma infinite_of_open {s : Set ℤ}: Set.Nonempty s →  IsOpen s  → Set.Infinite s := by
+  intro nonemptys open_s
   cases' open_s with sempty sseq
   · aesop
   · rcases nonemptys with ⟨n, sn⟩
@@ -181,4 +159,31 @@ lemma clopen_of_S {a b : ℤ} (a_le_one : 1 ≤ a) : IsClopen (S a b) := by
   · constructor
     right
     intro n hn
-    sorry
+    simp [S] at hn
+    push_neg at hn
+    use a
+    constructor
+    linarith
+    intro k hk
+    simp [S]
+    intro m
+    simp [S] at hk
+    rcases hk with ⟨u, hu⟩
+    ring_nf at hu
+    intro hm
+    ring_nf at hm
+    ring_nf at hn
+    push_neg at hn
+    have : a * u + n = k := by rw [hu]; ring
+    rw [← this] at hm
+    ring_nf at hm
+    have : a * (m - u) = n - b := by ring_nf; rw [hm]; ring
+    specialize hn (m - u)
+    contradiction
+
+lemma not_closed_of_finite_complement {s : Set ℤ} (nonempty_s : Set.Nonempty s) (finite_s : Set.Finite s)
+  : ¬(IsClosed sᶜ) := by
+  intro closed_s
+  have : IsOpen s := by rw [← compl_compl s]; exact isOpen_compl_iff.mpr closed_s
+  have := infinite_of_open nonempty_s this
+  contradiction
