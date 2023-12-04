@@ -1,7 +1,11 @@
 import Mathlib.Tactic
+import Mathlib.Topology.Clopen
 
+-- def S (a b : ℤ) := {n | a ∣ n - b }
 
-def S (a b : ℤ) := {n | a ∣ n - b }
+open Pointwise
+
+def S (a b : ℤ) := {a} * (⊤ : Set ℤ) + {b}
 
 
 example (n : ℤ) : Even n ↔  n ∈ S 2 0 := by
@@ -14,10 +18,7 @@ example (n : ℤ) : Even n ↔  n ∈ S 2 0 := by
     simp
   · intro h
     simp [S] at h
-    rcases h with ⟨w, hw⟩
-    use w
-    rw [hw]
-    ring
+    assumption
 
 def O : Set (Set ℤ) := {∅} ∪ { U | ∀n ∈ U, ∃ m : ℤ, 1 ≤ m ∧ S m n ⊆ U}
 
@@ -80,14 +81,14 @@ lemma O_is_openInter : ∀ U V : Set ℤ , U ∈ O → V ∈ O → U ∩ V ∈ O
   assumption
 
 
-instance : TopologicalSpace ℤ
+instance SequenceTopology : TopologicalSpace ℤ
   where
     IsOpen := O
     isOpen_inter := by exact O_is_openInter
     isOpen_sUnion := by exact O_isOpen_sUnion
     isOpen_univ := by exact O_is_openZ
 
-lemma infinite_s (a b : ℤ) (ha : 1 ≤ a ) : Set.Infinite (S a b) := by
+lemma infinite_s {a b : ℤ} (ha : 1 ≤ a ) : Set.Infinite (S a b) := by
   refine Set.infinite_of_not_bddAbove ?_
   intro h
   cases' h with w hw
@@ -145,3 +146,39 @@ lemma infinite_s (a b : ℤ) (ha : 1 ≤ a ) : Set.Infinite (S a b) := by
   have : w < a*(-w - b + 1) + b := by
     linarith
   linarith
+
+open Topology
+
+#check IsClopen
+
+lemma infinite_of_open (s : Set ℤ): SequenceTopology.IsOpen s → Set.Nonempty s → Set.Infinite s := by
+  intro open_s nonemptys
+  cases' open_s with sempty sseq
+  · aesop
+  · rcases nonemptys with ⟨n, sn⟩
+    rcases sseq n sn with ⟨m, one_le_m, sm⟩
+    apply Set.Infinite.mono sm
+    apply infinite_s one_le_m
+
+lemma clopen_of_S {a b : ℤ} (a_le_one : 1 ≤ a) : IsClopen (S a b) := by
+  constructor
+  · right
+    simp
+    intro n n_inS
+    simp [S] at n_inS
+    use a
+    constructor
+    assumption
+    intro k hk
+    simp [S]
+    simp [S] at hk
+    rcases hk with ⟨m, hm⟩
+    rcases n_inS with ⟨l, hl⟩
+    use (m+l)
+    ring_nf
+    rw [hm, hl]
+    ring
+  · constructor
+    right
+    intro n hn
+    sorry
