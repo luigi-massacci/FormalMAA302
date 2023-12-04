@@ -27,7 +27,7 @@ open Int
 lemma O_is_openEmpty : ∅ ∈ O := by
   simp [O]
 
-lemma O_is_openX : Set.univ ∈ O := by
+lemma O_is_openZ : Set.univ ∈ O := by
   simp [O]
   use 1
 
@@ -79,6 +79,13 @@ lemma O_is_openInter : ∀ U V : Set ℤ , U ∈ O → V ∈ O → U ∩ V ∈ O
   rw [mul_comm v u]
   assumption
 
+
+instance : TopologicalSpace ℤ
+  where
+    IsOpen := O
+    isOpen_inter := by exact O_is_openInter
+    isOpen_sUnion := by exact O_isOpen_sUnion
+    isOpen_univ := by exact O_is_openZ
 
 lemma infinite_s (a b : ℤ) (ha : 1 ≤ a ) : Set.Infinite (S a b) := by
   refine Set.infinite_of_not_bddAbove ?_
