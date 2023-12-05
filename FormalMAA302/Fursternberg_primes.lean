@@ -5,153 +5,109 @@ import Mathlib.Topology.Clopen
 
 open Pointwise
 
-def S (a b : ℤ) := {a} * (⊤ : Set ℤ) + {b}
+def ArithSequence (m n : ℤ) := {m} * (⊤ : Set ℤ) + {n}
 
 
-example (n : ℤ) : Even n ↔  n ∈ S 2 0 := by
-  constructor <;> simp [S]
+example (n : ℤ) : Even n ↔  n ∈ ArithSequence 2 0 := by
+  constructor <;> simp [ArithSequence]
 
-def O : Set (Set ℤ) := {∅} ∪ { U | ∀n ∈ U, ∃ m : ℤ, 1 ≤ m ∧ S m n ⊆ U}
+def Opens : Set (Set ℤ) := {∅} ∪ { U | ∀n ∈ U, ∃ m : ℤ, 1 ≤ m ∧ ArithSequence m n ⊆ U}
 
 open Int
 
 
-lemma O_is_openEmpty : ∅ ∈ O := by
-  simp [O]
+lemma Opens_isOpenEmpty : ∅ ∈ Opens := by
+  simp [Opens]
 
-lemma O_is_openZ : Set.univ ∈ O := by
-  simp [O]
+lemma Opens_isOpenZ : Set.univ ∈ Opens := by
+  simp [Opens]
   use 1
 
-
-lemma O_isOpen_sUnion : ∀ C : Set (Set ℤ), (∀ (U : Set ℤ), U ∈ C → U ∈ O) → (⋃₀ C) ∈ O := by
-  simp [O]
+lemma Opens_isOpen_sUnion : ∀ C : Set (Set ℤ), (∀ (U : Set ℤ), U ∈ C → U ∈ Opens) → (⋃₀ C) ∈ Opens := by
+  simp [Opens]
   intro C hC n S S_in_C n_in_S
-  rcases hC _ S_in_C _ n_in_S with ⟨m, one_le_m, Smn_in_S⟩
-  use m
-  refine ⟨one_le_m, ?_⟩
+  rcases hC S S_in_C n n_in_S with ⟨m, one_le_m, Smn_in_S⟩
+  refine ⟨m, one_le_m, ?_⟩
   intro k k_in_Smn
-  use S
-  refine ⟨S_in_C, ?_⟩
+  refine ⟨S, S_in_C, ?_⟩
   apply subset_trans Smn_in_S <;> tauto
 
-lemma O_is_openInter : ∀ U V : Set ℤ , U ∈ O → V ∈ O → U ∩ V ∈ O:= by
-  simp [O]
+lemma Opens_isOpenInter : ∀ U V : Set ℤ , U ∈ Opens → V ∈ Opens → U ∩ V ∈ Opens:= by
+  simp [Opens]
   intro U V hU hV n n_in_U n_in_V
-  rcases hU _ n_in_U with ⟨u, hu⟩
-  rcases hV _ n_in_V with ⟨v, hv⟩
+  rcases hU _ n_in_U with ⟨u, one_le_u, S_in_u⟩
+  rcases hV _ n_in_V with ⟨v, one_le_v, S_in_v⟩
   use u*v
   constructor
-  · exact one_le_mul_of_one_le_of_one_le hu.1 hv.1
-  constructor
-  · refine subset_trans ?_ hu.2
-    simp [S]
-    intro a ⟨k, hk⟩
-    use v*k
-    ring_nf
-    assumption
-  · refine subset_trans ?_ hv.2
-    simp [S]
-    intro a ⟨k, hk⟩
-    use u*k
-    ring_nf
-    rw [mul_comm v u]
-    assumption
+  · exact one_le_mul_of_one_le_of_one_le one_le_u one_le_v
+  refine ⟨subset_trans ?_ S_in_u, subset_trans ?_ S_in_v⟩ <;> (simp [ArithSequence]; intro a ⟨k, hk⟩)
+  · use v*k; ring_nf; assumption
+  · use u*k; ring_nf; rw [mul_comm v u]; assumption
 
 
 instance SequenceTopology : TopologicalSpace ℤ
   where
-    IsOpen := O
-    isOpen_inter := by exact O_is_openInter
-    isOpen_sUnion := by exact O_isOpen_sUnion
-    isOpen_univ := by exact O_is_openZ
+    IsOpen := Opens
+    isOpen_inter := by exact Opens_isOpenInter
+    isOpen_sUnion := by exact Opens_isOpen_sUnion
+    isOpen_univ := by exact Opens_isOpenZ
 
-lemma infinite_s {a b : ℤ} (ha : 1 ≤ a ) : Set.Infinite (S a b) := by
+lemma Infinite_of_ArithSequence {a b : ℤ} (ha : 1 ≤ a ) : Set.Infinite (ArithSequence a b) := by
   refine Set.infinite_of_not_bddAbove ?_
   intro h
   cases' h with w hw
-  simp at hw
-  unfold upperBounds at hw
-  simp at hw
   by_cases wpos : 0 < w
-  · have : w ≤ a*w := by
-      nth_rewrite 1 [← one_mul w]
-      apply mul_le_mul (ha) (le_refl w) <;> linarith
-    by_cases bpos : 0 < b
-    · have : a*w + b ∈ S a b := by simp [S]
-      specialize hw this
-      have : a*w < a*w + b := by
-        apply (lt_add_iff_pos_right (a*w)).mpr bpos
-      linarith
-    · push_neg at bpos
-      have : a*(w - b + 1) + b ∈ S a b:= by simp [S]
-      specialize hw this
-      have : -b ≤ a*(-b) := by
-        nth_rewrite 1 [← one_mul (-b)]
-        apply mul_le_mul
-        assumption
-        rfl
-        linarith
-        linarith
-      have : 0 ≤ a*(-b) + b := by linarith
-      have : w <  a*(w - b + 1) := by
-        linarith
-      linarith
-  push_neg at wpos
+  · by_cases bpos : 0 < b
+    · specialize hw (show a*w + b ∈ ArithSequence a b by simp [ArithSequence])
+      nlinarith
+    · specialize hw (show a*(w - b + 1) + b ∈ ArithSequence a b by simp [ArithSequence])
+      nlinarith
   by_cases bpos : 0 < b
-  · have : b ∈ S a b := by simp [S]
-    specialize hw this
-    linarith
-  push_neg at bpos
-  have : a*(-w - b + 1) + b ∈ S a b:= by simp [S]
-  specialize hw this
-  have : 0 ≤ -w := by
-    linarith
-  have : 0 ≤ a := by linarith
-  have : 0 ≤ a * (-w) := by
-    rw [← one_mul 0]
-    apply mul_le_mul <;> linarith
-  have : w ≤ a * (-w) := by linarith
-  have : 0 ≤ -b := by
-      linarith
-  have : 0 ≤ a * (-b) := by
-    rw [← one_mul 0]
-    apply mul_le_mul <;> linarith
-  have : -b ≤ a * (-b):= by
-    nth_rewrite 1 [← one_mul (-b)]
-    apply mul_le_mul <;> linarith
-  have : 0 ≤ a * (-b) + b := by linarith
-  have : w < a*(-w - b + 1) + b := by
-    linarith
-  linarith
+  · specialize hw (show b ∈ ArithSequence a b by simp [ArithSequence])
+    nlinarith
+  · specialize hw (show a*(-w - b + 1) + b ∈ ArithSequence a b by simp [ArithSequence])
+    nlinarith
 
 open Topology
 
-#check IsClopen
-
-lemma infinite_of_open {s : Set ℤ}: Set.Nonempty s →  IsOpen s  → Set.Infinite s := by
-  intro nonemptys open_s
-  cases' open_s with sempty sseq
+lemma Infinite_of_IsOpen {U : Set ℤ}: Set.Nonempty U →  IsOpen U  → Set.Infinite U := by
+  intro nonempty_U open_U
+  cases' open_U with emptyU seq_in_U
   · aesop
-  · rcases nonemptys with ⟨n, sn⟩
-    rcases sseq n sn with ⟨m, one_le_m, sm⟩
-    apply Set.Infinite.mono sm
-    apply infinite_s one_le_m
+  · rcases nonempty_U with ⟨n, n_in_U⟩
+    rcases seq_in_U n n_in_U with ⟨m, one_le_m, seq_m_in_U⟩
+    apply Set.Infinite.mono seq_m_in_U
+    apply Infinite_of_ArithSequence one_le_m
 
-lemma clopen_of_S (a b : ℤ) (a_le_one : 1 ≤ a) : IsClopen (S a b) := by
+lemma IsClosed_of_ArithSequence (a b : ℤ) (a_le_one : 1 ≤ a) : IsClosed (ArithSequence a b) := by
+  constructor
+  right
+  intro n n_in_seq_ab
+  refine ⟨a, a_le_one, ?_⟩
+  intro k k_in_seq_an
+  simp [ArithSequence] at *
+  intro m hm
+  rcases k_in_seq_an with ⟨u, hu⟩
+  specialize n_in_seq_ab (m - u)
+  ring_nf at n_in_seq_ab
+  rw [hm, hu] at n_in_seq_ab
+  ring_nf at n_in_seq_ab
+  assumption
+
+lemma IsClopen_of_ArithSequence (a b : ℤ) (a_le_one : 1 ≤ a) : IsClopen (ArithSequence a b) := by
   constructor
   · right
     simp
-    intro n n_inS
-    simp [S] at n_inS
+    intro n n_in_seq
+    simp [ArithSequence] at n_in_seq
     use a
     constructor
     assumption
     intro k hk
-    simp [S]
-    simp [S] at hk
+    simp [ArithSequence]
+    simp [ArithSequence] at hk
     rcases hk with ⟨m, hm⟩
-    rcases n_inS with ⟨l, hl⟩
+    rcases n_in_seq with ⟨l, hl⟩
     use (m+l)
     ring_nf
     rw [hm, hl]
@@ -159,15 +115,15 @@ lemma clopen_of_S (a b : ℤ) (a_le_one : 1 ≤ a) : IsClopen (S a b) := by
   · constructor
     right
     intro n hn
-    simp [S] at hn
+    simp [ArithSequence] at hn
     push_neg at hn
     use a
     constructor
     linarith
     intro k hk
-    simp [S]
+    simp [ArithSequence]
     intro m
-    simp [S] at hk
+    simp [ArithSequence] at hk
     rcases hk with ⟨u, hu⟩
     ring_nf at hu
     intro hm
@@ -181,17 +137,14 @@ lemma clopen_of_S (a b : ℤ) (a_le_one : 1 ≤ a) : IsClopen (S a b) := by
     specialize hn (m - u)
     contradiction
 
-lemma not_closed_of_finite_complement {s : Set ℤ} (nonempty_s : Set.Nonempty s) (finite_s : Set.Finite s)
-  : ¬(IsClosed sᶜ) := by
-  intro closed_s
-  have : IsOpen s := by rw [← compl_compl s]; exact isOpen_compl_iff.mpr closed_s
-  have := infinite_of_open nonempty_s this
+lemma not_closed_of_finite_complement {U : Set ℤ} (nonempty_U : Set.Nonempty U)
+    (finite_U : Set.Finite U) : ¬(IsClosed Uᶜ) := by
+  intro closed_U
+  have : IsOpen U := by rw [← compl_compl U]; exact isOpen_compl_iff.mpr closed_U
+  have := Infinite_of_IsOpen nonempty_U this
   contradiction
 
 open Int
-
-lemma nat_cast {n : ℤ} (npos : 0 ≤ n) : ↑(toNat n) = n := by
-  exact toNat_of_nonneg npos
 
 lemma prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p ∧ n = p*k := by
   by_cases n_pos : 0 < n
@@ -235,7 +188,6 @@ lemma prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p 
       push_neg at n_pos
       apply lt_of_le_of_ne n_pos nzero
     have neg_npos : 0 < -n := by linarith
-    -- set factors :=  with factors_def
     have : -n ≠ 1:= by
       intro h
       simp [← h] at hn
@@ -246,7 +198,7 @@ lemma prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p 
       linarith
       have h₃ := (Mathlib.Tactic.Zify.nat_cast_eq (toNat (-n)) (1)).mp h₂
       have : 0 ≤ -n := by exact Int.le_of_lt neg_npos
-      have : ↑(toNat (-n)) = -n := by exact nat_cast this
+      have : ↑(toNat (-n)) = -n := by exact toNat_of_nonneg this
       rw [this] at h₃
       contradiction
     have : ∃ p, p ∈ (toNat (-n)).factors := by
@@ -262,14 +214,14 @@ lemma prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p 
     rw [this]
     rw_mod_cast [← hk]
     have : 0 ≤ (-n) := by exact Int.le_of_lt neg_npos
-    have := nat_cast (show 0 ≤ -n by linarith)
+    have := toNat_of_nonneg (show 0 ≤ -n by linarith)
     rw [this]
     ring
 
 
-lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, S p 0 = {-1, 1}ᶜ := by
+lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, ArithSequence p 0 = {-1, 1}ᶜ := by
   ext n
-  simp [S]
+  simp [ArithSequence]
   constructor
   · intro hi
     rcases hi with ⟨p, hp, k, hpk⟩
@@ -297,16 +249,16 @@ lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, S p 0 = {-1, 1}ᶜ := 
     symm
     assumption
 
-lemma exists_infinite_primes : Set.Infinite { p : ℕ  | Nat.Prime p } := by
+lemma Infinite_Primes : Set.Infinite { p : ℕ  | Nat.Prime p } := by
   by_contra h
   have finite_primes : Set.Finite { p : ℕ | Nat.Prime p } := by exact Set.not_infinite.mp h
-  have is_closed_primes_union : IsClosed (⋃ p ∈ { p : ℕ | Nat.Prime p }, S p 0) := by
+  have isClosed_primes_union : IsClosed (⋃ p ∈ { p : ℕ | Nat.Prime p }, ArithSequence p 0) := by
     refine Set.Finite.isClosed_biUnion finite_primes ?h
     intro p hp
     simp at hp
     have : 1 ≤ p := by apply le_of_lt (Nat.Prime.one_lt hp)
     have : (1 : ℤ) ≤ (p : ℤ) := by exact toNat_le.mp this
-    have := clopen_of_S p 0 this
+    have := IsClopen_of_ArithSequence p 0 this
     exact IsClopen.isClosed this
-  rw [primes_cover] at is_closed_primes_union
-  apply not_closed_of_finite_complement (Set.insert_nonempty (-1) {1}) (Set.toFinite {-1, 1}) is_closed_primes_union
+  rw [primes_cover] at isClosed_primes_union
+  apply not_closed_of_finite_complement (Set.insert_nonempty (-1) {1}) (Set.toFinite {-1, 1}) isClosed_primes_union
