@@ -42,7 +42,7 @@ lemma O_is_openInter : ∀ U V : Set ℤ , U ∈ O → V ∈ O → U ∩ V ∈ O
   rcases hV _ n_in_V with ⟨v, hv⟩
   use u*v
   constructor
-  · exact one_le_mul_of_one_le_of_one_le hu.1 hv.1 --exact?
+  · exact one_le_mul_of_one_le_of_one_le hu.1 hv.1
   constructor
   · refine subset_trans ?_ hu.2
     simp [S]
@@ -138,7 +138,7 @@ lemma infinite_of_open {s : Set ℤ}: Set.Nonempty s →  IsOpen s  → Set.Infi
     apply Set.Infinite.mono sm
     apply infinite_s one_le_m
 
-lemma clopen_of_S {a b : ℤ} (a_le_one : 1 ≤ a) : IsClopen (S a b) := by
+lemma clopen_of_S (a b : ℤ) (a_le_one : 1 ≤ a) : IsClopen (S a b) := by
   constructor
   · right
     simp
@@ -187,3 +187,126 @@ lemma not_closed_of_finite_complement {s : Set ℤ} (nonempty_s : Set.Nonempty s
   have : IsOpen s := by rw [← compl_compl s]; exact isOpen_compl_iff.mpr closed_s
   have := infinite_of_open nonempty_s this
   contradiction
+
+open Int
+
+lemma nat_cast {n : ℤ} (npos : 0 ≤ n) : ↑(toNat n) = n := by
+  exact toNat_of_nonneg npos
+
+lemma prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p ∧ n = p*k := by
+  by_cases n_pos : 0 < n
+  · set factors := (toNat n).factors with factors_def
+    have : factors ≠ [] := by
+      rw [factors_def]
+      simp
+      intro h
+      cases' h with h₁ h₂
+      linarith
+      have : 1 < n := by
+        by_contra h
+        push_neg at h
+        have : n = 1 := by exact le_antisymm h n_pos
+        exact hn.2 this
+      have : 1 < toNat n := by exact lt_toNat.mpr this
+      linarith
+    have : ∃ p, p ∈ (Int.toNat n).factors := by
+      exact List.exists_mem_of_ne_nil ((toNat n).factors) this
+    rcases this with ⟨p, hp⟩
+    have := Nat.dvd_of_mem_factors hp
+    rcases this with ⟨k, hk⟩
+    use p
+    use k
+    constructor
+    exact Nat.prime_of_mem_factors hp
+    have : (p : ℤ) * (k : ℤ) = (p*k : ℤ) := by exact rfl
+    rw_mod_cast [← hk]
+    have ne_zero : n ≠ 0 := by linarith
+    have ne_one : n ≠ 1 := by exact hn.2
+    cases' n with n m
+    simp
+    have : negSucc m < 0 := by
+      exact (this factors_def).elim
+    contradiction
+  · by_cases nzero : n = 0
+    use 2
+    use 0
+    simp [nzero]
+    have n_lt_zero : n < 0 := by
+      push_neg at n_pos
+      apply lt_of_le_of_ne n_pos nzero
+    have neg_npos : 0 < -n := by linarith
+    -- set factors :=  with factors_def
+    have : -n ≠ 1:= by
+      intro h
+      simp [← h] at hn
+    have : (toNat (-n)).factors ≠ [] := by
+      simp
+      intro h
+      cases' h with h₁ h₂
+      linarith
+      have h₃ := (Mathlib.Tactic.Zify.nat_cast_eq (toNat (-n)) (1)).mp h₂
+      have : 0 ≤ -n := by exact Int.le_of_lt neg_npos
+      have : ↑(toNat (-n)) = -n := by exact nat_cast this
+      rw [this] at h₃
+      contradiction
+    have : ∃ p, p ∈ (toNat (-n)).factors := by
+      exact List.exists_mem_of_ne_nil ((toNat (-n)).factors) this
+    rcases this with ⟨p, hp⟩
+    have := Nat.dvd_of_mem_factors hp
+    rcases this with ⟨k, hk⟩
+    use p
+    use (-k)
+    constructor
+    exact Nat.prime_of_mem_factors hp
+    have : (p : ℤ) * (-k : ℤ) = -(p*k : ℤ) := by ring
+    rw [this]
+    rw_mod_cast [← hk]
+    have : 0 ≤ (-n) := by exact Int.le_of_lt neg_npos
+    have := nat_cast (show 0 ≤ -n by linarith)
+    rw [this]
+    ring
+
+
+lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, S p 0 = {-1, 1}ᶜ := by
+  ext n
+  simp [S]
+  constructor
+  · intro hi
+    rcases hi with ⟨p, hp, k, hpk⟩
+    intro hn
+    cases' hn with hneg hone
+    · rw [hneg] at hpk
+      have p_unit : (p : ℤ) = 1 ∨ (p : ℤ) = -1 := by exact eq_one_or_neg_one_of_mul_eq_neg_one hpk
+      have := by exact Prime.not_unit (Nat.prime_iff_prime_int.mp hp)
+      have : (p : ℤ) ≠ 1 ∧ (p : ℤ) ≠ -1 := by
+        constructor <;> (intro punit; rw [punit] at this; contradiction)
+      cases' p_unit <;> aesop
+    · rw [hone] at hpk
+      have p_unit : (p : ℤ) = 1 ∨ (p : ℤ) = -1 := by exact eq_one_or_neg_one_of_mul_eq_one hpk
+      have := by exact Prime.not_unit (Nat.prime_iff_prime_int.mp hp)
+      have : (p : ℤ) ≠ 1 ∧ (p : ℤ)  ≠ -1 := by
+        constructor <;> (intro punit; rw [punit] at this; contradiction)
+      cases' p_unit <;> aesop
+  · intro hn
+    push_neg at hn
+    rcases prime_factor n hn with ⟨p, k, hp, hpk⟩
+    use p
+    constructor
+    assumption
+    use k
+    symm
+    assumption
+
+lemma exists_infinite_primes : Set.Infinite { p : ℕ  | Nat.Prime p } := by
+  by_contra h
+  have finite_primes : Set.Finite { p : ℕ | Nat.Prime p } := by exact Set.not_infinite.mp h
+  have is_closed_primes_union : IsClosed (⋃ p ∈ { p : ℕ | Nat.Prime p }, S p 0) := by
+    refine Set.Finite.isClosed_biUnion finite_primes ?h
+    intro p hp
+    simp at hp
+    have : 1 ≤ p := by apply le_of_lt (Nat.Prime.one_lt hp)
+    have : (1 : ℤ) ≤ (p : ℤ) := by exact toNat_le.mp this
+    have := clopen_of_S p 0 this
+    exact IsClopen.isClosed this
+  rw [primes_cover] at is_closed_primes_union
+  apply not_closed_of_finite_complement (Set.insert_nonempty (-1) {1}) (Set.toFinite {-1, 1}) is_closed_primes_union
