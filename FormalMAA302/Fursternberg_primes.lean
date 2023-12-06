@@ -117,46 +117,62 @@ lemma not_closed_of_complement_of_finite {U : Set ℤ} (nonempty_U : Set.Nonempt
 
 open Int
 
-lemma exists_prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p ∧ p*k = n := by
-  by_cases n_pos : 0 < n
-  · have nonempty_factors : (toNat n).factors ≠ [] := by
-      simp
-      intro h
-      cases' h with n_le_zero n_eq_one
-      · linarith
-      · have : 1 < n := lt_of_le_of_ne (by linarith) (Ne.symm hn.2)
-        have : 1 < toNat n := by exact lt_toNat.mpr (this)
-        linarith
-    have : ∃ p, p ∈ (Int.toNat n).factors := by
-      exact List.exists_mem_of_ne_nil ((toNat n).factors) nonempty_factors
-    rcases this with ⟨p, hp⟩
-    rcases Nat.dvd_of_mem_factors hp with ⟨k, hk⟩
-    refine ⟨p, k, Nat.prime_of_mem_factors hp, ?_⟩
-    rw_mod_cast [← hk]
-    exact toNat_of_nonneg (show 0 ≤ n by linarith)
-  · by_cases nzero : n = 0
-    · refine ⟨2, 0, ?_⟩
-      simp [nzero]
-    · have n_lt_zero : n < 0 := by
-        push_neg at n_pos
-        apply lt_of_le_of_ne n_pos nzero
-      have neg_n_ne_one : -n ≠ 1 := by intro h; simp [← h] at hn
-      have : (toNat (-n)).factors ≠ [] := by
-        simp
-        intro h
-        cases' h with zero_le_n n_eq_one
-        · linarith
-        · have : 1 < -n := lt_of_le_of_ne (by linarith) (Ne.symm neg_n_ne_one)
-          have : 1 < toNat (-n) := by exact lt_toNat.mpr (this)
-          linarith
-      have : ∃ p, p ∈ (toNat (-n)).factors := by
-        exact List.exists_mem_of_ne_nil ((toNat (-n)).factors) this
-      rcases this with ⟨p, hp⟩
-      rcases Nat.dvd_of_mem_factors hp with ⟨k, hk⟩
-      refine ⟨p, -k, Nat.prime_of_mem_factors hp, ?_⟩
-      rw_mod_cast [(show (p : ℤ) * (-k : ℤ) = -(p*k : ℤ) by ring), ← hk]
-      rw [toNat_of_nonneg (show 0 ≤ -n by linarith)]
-      ring
+-- With Thanks to Ruben Wan de Welde
+lemma exists_prime_factor (n : ℤ) (n_ne_one : n ≠ 1) (n_ne_negone : n ≠ -1):
+    ∃ p, Nat.Prime p ∧ ∃m, (↑p) * m = n:= by
+  use n.natAbs.minFac
+  constructor
+  · refine Nat.minFac_prime ?h.left.n1
+    rw [(show 1 = Int.natAbs 1 by rfl)]
+    intro h
+    have := Int.natAbs_eq_iff_sq_eq.mp h
+    aesop
+  use n / n.natAbs.minFac
+  rw [mul_comm, Int.ediv_mul_cancel]
+  rw [Int.ofNat_dvd_left]
+  exact Nat.minFac_dvd (Int.natAbs n)
+
+
+-- lemma exists_prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p ∧ p*k = n := by
+--   by_cases n_pos : 0 < n
+--   · have nonempty_factors : (toNat n).factors ≠ [] := by
+--       simp
+--       intro h
+--       cases' h with n_le_zero n_eq_one
+--       · linarith
+--       · have : 1 < n := lt_of_le_of_ne (by linarith) (Ne.symm hn.2)
+--         have : 1 < toNat n := by exact lt_toNat.mpr (this)
+--         linarith
+--     have : ∃ p, p ∈ (Int.toNat n).factors := by
+--       exact List.exists_mem_of_ne_nil ((toNat n).factors) nonempty_factors
+--     rcases this with ⟨p, hp⟩
+--     rcases Nat.dvd_of_mem_factors hp with ⟨k, hk⟩
+--     refine ⟨p, k, Nat.prime_of_mem_factors hp, ?_⟩
+--     rw_mod_cast [← hk]
+--     exact toNat_of_nonneg (show 0 ≤ n by linarith)
+--   · by_cases nzero : n = 0
+--     · refine ⟨2, 0, ?_⟩
+--       simp [nzero, Nat.prime_two]
+--     · have n_lt_zero : n < 0 := by
+--         push_neg at n_pos
+--         apply lt_of_le_of_ne n_pos nzero
+--       have neg_n_ne_one : -n ≠ 1 := by intro h; simp [← h] at hn
+--       have : (toNat (-n)).factors ≠ [] := by
+--         simp
+--         intro h
+--         cases' h with zero_le_n n_eq_one
+--         · linarith
+--         · have : 1 < -n := lt_of_le_of_ne (by linarith) (Ne.symm neg_n_ne_one)
+--           have : 1 < toNat (-n) := by exact lt_toNat.mpr (this)
+--           linarith
+--       have : ∃ p, p ∈ (toNat (-n)).factors := by
+--         exact List.exists_mem_of_ne_nil ((toNat (-n)).factors) this
+--       rcases this with ⟨p, hp⟩
+--       rcases Nat.dvd_of_mem_factors hp with ⟨k, hk⟩
+--       refine ⟨p, -k, Nat.prime_of_mem_factors hp, ?_⟩
+--       rw_mod_cast [(show (p : ℤ) * (-k : ℤ) = -(p*k : ℤ) by ring), ← hk]
+--       rw [toNat_of_nonneg (show 0 ≤ -n by linarith)]
+--       ring
 
 lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, ArithSequence p 0 = {-1, 1}ᶜ := by
   ext n
@@ -175,8 +191,7 @@ lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, ArithSequence p 0 = {-
       cases' p_unit <;> aesop
   · intro hn
     push_neg at hn
-    rcases exists_prime_factor n hn with ⟨p, k, prime_p, hpk⟩
-    refine ⟨p, prime_p, k, hpk⟩
+    exact exists_prime_factor n hn.2 hn.1
 
 lemma Infinite_Primes : Set.Infinite { p : ℕ  | Nat.Prime p } := by
   by_contra h
