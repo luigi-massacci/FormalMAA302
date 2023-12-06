@@ -4,17 +4,14 @@ import Mathlib.Topology.Clopen
 -- def S (a b : ℤ) := {n | a ∣ n - b }
 
 open Pointwise
+open Int
 
 def ArithSequence (m n : ℤ) := {m} * (⊤ : Set ℤ) + {n}
-
 
 example (n : ℤ) : Even n ↔  n ∈ ArithSequence 2 0 := by
   constructor <;> simp [ArithSequence]
 
 def Opens : Set (Set ℤ) := {∅} ∪ { U | ∀n ∈ U, ∃ m : ℤ, 1 ≤ m ∧ ArithSequence m n ⊆ U}
-
-open Int
-
 
 lemma Opens_isOpenEmpty : ∅ ∈ Opens := by
   simp [Opens]
@@ -48,9 +45,9 @@ lemma Opens_isOpenInter : ∀ U V : Set ℤ , U ∈ Opens → V ∈ Opens → U 
 instance SequenceTopology : TopologicalSpace ℤ
   where
     IsOpen := Opens
-    isOpen_inter := by exact Opens_isOpenInter
-    isOpen_sUnion := by exact Opens_isOpen_sUnion
-    isOpen_univ := by exact Opens_isOpenZ
+    isOpen_inter := Opens_isOpenInter
+    isOpen_sUnion := Opens_isOpen_sUnion
+    isOpen_univ := Opens_isOpenZ
 
 lemma Infinite_of_ArithSequence {a b : ℤ} (ha : 1 ≤ a ) : Set.Infinite (ArithSequence a b) := by
   refine Set.infinite_of_not_bddAbove ?_
@@ -79,11 +76,25 @@ lemma Infinite_of_IsOpen {U : Set ℤ}: Set.Nonempty U →  IsOpen U  → Set.In
     apply Set.Infinite.mono seq_m_in_U
     apply Infinite_of_ArithSequence one_le_m
 
-lemma IsClosed_of_ArithSequence (a b : ℤ) (a_le_one : 1 ≤ a) : IsClosed (ArithSequence a b) := by
+lemma IsOpen_of_ArithSequence (a b : ℤ) (one_le_a : 1 ≤ a) : IsOpen (ArithSequence a b) := by
+  right
+  simp
+  intro n n_in_seq
+  refine ⟨a, one_le_a, ?_⟩
+  intro k k_in_seq_ab
+  simp [ArithSequence] at *
+  rcases k_in_seq_ab with ⟨u, hu⟩
+  rcases n_in_seq with ⟨v, hv⟩
+  use (u+v)
+  ring_nf
+  rw [hu, hv]
+  ring
+
+lemma IsClosed_of_ArithSequence (a b : ℤ) (one_le_a : 1 ≤ a) : IsClosed (ArithSequence a b) := by
   constructor
   right
   intro n n_in_seq_ab
-  refine ⟨a, a_le_one, ?_⟩
+  refine ⟨a, one_le_a, ?_⟩
   intro k k_in_seq_an
   simp [ArithSequence] at *
   intro m hm
@@ -94,50 +105,10 @@ lemma IsClosed_of_ArithSequence (a b : ℤ) (a_le_one : 1 ≤ a) : IsClosed (Ari
   ring_nf at n_in_seq_ab
   assumption
 
-lemma IsClopen_of_ArithSequence (a b : ℤ) (a_le_one : 1 ≤ a) : IsClopen (ArithSequence a b) := by
-  constructor
-  · right
-    simp
-    intro n n_in_seq
-    simp [ArithSequence] at n_in_seq
-    use a
-    constructor
-    assumption
-    intro k hk
-    simp [ArithSequence]
-    simp [ArithSequence] at hk
-    rcases hk with ⟨m, hm⟩
-    rcases n_in_seq with ⟨l, hl⟩
-    use (m+l)
-    ring_nf
-    rw [hm, hl]
-    ring
-  · constructor
-    right
-    intro n hn
-    simp [ArithSequence] at hn
-    push_neg at hn
-    use a
-    constructor
-    linarith
-    intro k hk
-    simp [ArithSequence]
-    intro m
-    simp [ArithSequence] at hk
-    rcases hk with ⟨u, hu⟩
-    ring_nf at hu
-    intro hm
-    ring_nf at hm
-    ring_nf at hn
-    push_neg at hn
-    have : a * u + n = k := by rw [hu]; ring
-    rw [← this] at hm
-    ring_nf at hm
-    have : a * (m - u) = n - b := by ring_nf; rw [hm]; ring
-    specialize hn (m - u)
-    contradiction
+lemma IsClopen_of_ArithSequence (a b : ℤ) (one_le_a : 1 ≤ a) : IsClopen (ArithSequence a b) :=
+  ⟨IsOpen_of_ArithSequence a b one_le_a,  IsClosed_of_ArithSequence a b one_le_a⟩
 
-lemma not_closed_of_finite_complement {U : Set ℤ} (nonempty_U : Set.Nonempty U)
+lemma not_closed_of_complement_of_finite {U : Set ℤ} (nonempty_U : Set.Nonempty U)
     (finite_U : Set.Finite U) : ¬(IsClosed Uᶜ) := by
   intro closed_U
   have : IsOpen U := by rw [← compl_compl U]; exact isOpen_compl_iff.mpr closed_U
@@ -146,119 +117,76 @@ lemma not_closed_of_finite_complement {U : Set ℤ} (nonempty_U : Set.Nonempty U
 
 open Int
 
-lemma prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p ∧ n = p*k := by
+lemma exists_prime_factor (n : ℤ) (hn : n ≠ -1 ∧ n ≠ 1) : ∃ p k, Nat.Prime p ∧ p*k = n := by
   by_cases n_pos : 0 < n
-  · set factors := (toNat n).factors with factors_def
-    have : factors ≠ [] := by
-      rw [factors_def]
+  · have nonempty_factors : (toNat n).factors ≠ [] := by
       simp
       intro h
-      cases' h with h₁ h₂
-      linarith
-      have : 1 < n := by
-        by_contra h
-        push_neg at h
-        have : n = 1 := by exact le_antisymm h n_pos
-        exact hn.2 this
-      have : 1 < toNat n := by exact lt_toNat.mpr this
-      linarith
+      cases' h with n_le_zero n_eq_one
+      · linarith
+      · have : 1 < n := lt_of_le_of_ne (by linarith) (Ne.symm hn.2)
+        have : 1 < toNat n := by exact lt_toNat.mpr (this)
+        linarith
     have : ∃ p, p ∈ (Int.toNat n).factors := by
-      exact List.exists_mem_of_ne_nil ((toNat n).factors) this
+      exact List.exists_mem_of_ne_nil ((toNat n).factors) nonempty_factors
     rcases this with ⟨p, hp⟩
-    have := Nat.dvd_of_mem_factors hp
-    rcases this with ⟨k, hk⟩
-    use p
-    use k
-    constructor
-    exact Nat.prime_of_mem_factors hp
-    have : (p : ℤ) * (k : ℤ) = (p*k : ℤ) := by exact rfl
+    rcases Nat.dvd_of_mem_factors hp with ⟨k, hk⟩
+    refine ⟨p, k, Nat.prime_of_mem_factors hp, ?_⟩
     rw_mod_cast [← hk]
-    have ne_zero : n ≠ 0 := by linarith
-    have ne_one : n ≠ 1 := by exact hn.2
-    cases' n with n m
-    simp
-    have : negSucc m < 0 := by
-      exact (this factors_def).elim
-    contradiction
+    exact toNat_of_nonneg (show 0 ≤ n by linarith)
   · by_cases nzero : n = 0
-    use 2
-    use 0
-    simp [nzero]
-    have n_lt_zero : n < 0 := by
-      push_neg at n_pos
-      apply lt_of_le_of_ne n_pos nzero
-    have neg_npos : 0 < -n := by linarith
-    have : -n ≠ 1:= by
-      intro h
-      simp [← h] at hn
-    have : (toNat (-n)).factors ≠ [] := by
-      simp
-      intro h
-      cases' h with h₁ h₂
-      linarith
-      have h₃ := (Mathlib.Tactic.Zify.nat_cast_eq (toNat (-n)) (1)).mp h₂
-      have : 0 ≤ -n := by exact Int.le_of_lt neg_npos
-      have : ↑(toNat (-n)) = -n := by exact toNat_of_nonneg this
-      rw [this] at h₃
-      contradiction
-    have : ∃ p, p ∈ (toNat (-n)).factors := by
-      exact List.exists_mem_of_ne_nil ((toNat (-n)).factors) this
-    rcases this with ⟨p, hp⟩
-    have := Nat.dvd_of_mem_factors hp
-    rcases this with ⟨k, hk⟩
-    use p
-    use (-k)
-    constructor
-    exact Nat.prime_of_mem_factors hp
-    have : (p : ℤ) * (-k : ℤ) = -(p*k : ℤ) := by ring
-    rw [this]
-    rw_mod_cast [← hk]
-    have : 0 ≤ (-n) := by exact Int.le_of_lt neg_npos
-    have := toNat_of_nonneg (show 0 ≤ -n by linarith)
-    rw [this]
-    ring
-
+    · refine ⟨2, 0, ?_⟩
+      simp [nzero]
+    · have n_lt_zero : n < 0 := by
+        push_neg at n_pos
+        apply lt_of_le_of_ne n_pos nzero
+      have neg_n_ne_one : -n ≠ 1 := by intro h; simp [← h] at hn
+      have : (toNat (-n)).factors ≠ [] := by
+        simp
+        intro h
+        cases' h with zero_le_n n_eq_one
+        · linarith
+        · have : 1 < -n := lt_of_le_of_ne (by linarith) (Ne.symm neg_n_ne_one)
+          have : 1 < toNat (-n) := by exact lt_toNat.mpr (this)
+          linarith
+      have : ∃ p, p ∈ (toNat (-n)).factors := by
+        exact List.exists_mem_of_ne_nil ((toNat (-n)).factors) this
+      rcases this with ⟨p, hp⟩
+      rcases Nat.dvd_of_mem_factors hp with ⟨k, hk⟩
+      refine ⟨p, -k, Nat.prime_of_mem_factors hp, ?_⟩
+      rw_mod_cast [(show (p : ℤ) * (-k : ℤ) = -(p*k : ℤ) by ring), ← hk]
+      rw [toNat_of_nonneg (show 0 ≤ -n by linarith)]
+      ring
 
 lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, ArithSequence p 0 = {-1, 1}ᶜ := by
   ext n
   simp [ArithSequence]
   constructor
-  · intro hi
-    rcases hi with ⟨p, hp, k, hpk⟩
+  · intro h
+    rcases h with ⟨p, prime_p, k, hpk⟩
     intro hn
-    cases' hn with hneg hone
-    · rw [hneg] at hpk
+    have not_unit_p := by exact Prime.not_unit (Nat.prime_iff_prime_int.mp prime_p)
+    cases' hn with hn hn
+    · rw [hn] at hpk
       have p_unit : (p : ℤ) = 1 ∨ (p : ℤ) = -1 := by exact eq_one_or_neg_one_of_mul_eq_neg_one hpk
-      have := by exact Prime.not_unit (Nat.prime_iff_prime_int.mp hp)
-      have : (p : ℤ) ≠ 1 ∧ (p : ℤ) ≠ -1 := by
-        constructor <;> (intro punit; rw [punit] at this; contradiction)
       cases' p_unit <;> aesop
-    · rw [hone] at hpk
+    · rw [hn] at hpk
       have p_unit : (p : ℤ) = 1 ∨ (p : ℤ) = -1 := by exact eq_one_or_neg_one_of_mul_eq_one hpk
-      have := by exact Prime.not_unit (Nat.prime_iff_prime_int.mp hp)
-      have : (p : ℤ) ≠ 1 ∧ (p : ℤ)  ≠ -1 := by
-        constructor <;> (intro punit; rw [punit] at this; contradiction)
       cases' p_unit <;> aesop
   · intro hn
     push_neg at hn
-    rcases prime_factor n hn with ⟨p, k, hp, hpk⟩
-    use p
-    constructor
-    assumption
-    use k
-    symm
-    assumption
+    rcases exists_prime_factor n hn with ⟨p, k, prime_p, hpk⟩
+    refine ⟨p, prime_p, k, hpk⟩
 
 lemma Infinite_Primes : Set.Infinite { p : ℕ  | Nat.Prime p } := by
   by_contra h
   have finite_primes : Set.Finite { p : ℕ | Nat.Prime p } := by exact Set.not_infinite.mp h
   have isClosed_primes_union : IsClosed (⋃ p ∈ { p : ℕ | Nat.Prime p }, ArithSequence p 0) := by
-    refine Set.Finite.isClosed_biUnion finite_primes ?h
-    intro p hp
-    simp at hp
-    have : 1 ≤ p := by apply le_of_lt (Nat.Prime.one_lt hp)
-    have : (1 : ℤ) ≤ (p : ℤ) := by exact toNat_le.mp this
-    have := IsClopen_of_ArithSequence p 0 this
-    exact IsClopen.isClosed this
+    refine Set.Finite.isClosed_biUnion finite_primes ?_
+    intro p prime_p
+    have one_le_p : (1 : ℤ) ≤ (p : ℤ) := by exact toNat_le.mp (le_of_lt (Nat.Prime.one_lt prime_p))
+    exact IsClosed_of_ArithSequence p 0 one_le_p
   rw [primes_cover] at isClosed_primes_union
-  apply not_closed_of_finite_complement (Set.insert_nonempty (-1) {1}) (Set.toFinite {-1, 1}) isClosed_primes_union
+  have nonempty_units : Set.Nonempty {-1, 1} := by exact (Set.insert_nonempty (-1) {1})
+  have finite_units : Set.Finite {-1, 1} := by exact (Set.toFinite {-1, 1})
+  exact not_closed_of_complement_of_finite nonempty_units finite_units isClosed_primes_union
