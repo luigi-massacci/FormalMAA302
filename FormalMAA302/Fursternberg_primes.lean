@@ -122,10 +122,8 @@ lemma exists_prime_factor (n : ℤ) (n_ne_one : n ≠ 1) (n_ne_negone : n ≠ -1
     ∃ p, Nat.Prime p ∧ ∃m, (↑p) * m = n:= by
   use n.natAbs.minFac
   constructor
-  · refine Nat.minFac_prime ?h.left.n1
-    rw [(show 1 = Int.natAbs 1 by rfl)]
-    intro h
-    have := Int.natAbs_eq_iff_sq_eq.mp h
+  · refine Nat.minFac_prime ?_
+    have := @Int.natAbs_eq_iff_sq_eq n 1
     aesop
   use n / n.natAbs.minFac
   rw [mul_comm, Int.ediv_mul_cancel]
