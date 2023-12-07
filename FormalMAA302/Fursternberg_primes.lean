@@ -1,6 +1,8 @@
 import Mathlib.Tactic
 import Mathlib.Topology.Clopen
-
+import Mathlib.Topology.Bases
+import Mathlib.Topology.Perfect
+import Mathlib.Data.Set.Finite
 -- def S (a b : ℤ) := {n | a ∣ n - b }
 
 open Pointwise
@@ -171,6 +173,101 @@ lemma exists_prime_factor (n : ℤ) (n_ne_one : n ≠ 1) (n_ne_negone : n ≠ -1
 --       rw_mod_cast [(show (p : ℤ) * (-k : ℤ) = -(p*k : ℤ) by ring), ← hk]
 --       rw [toNat_of_nonneg (show 0 ≤ -n by linarith)]
 --       ring
+
+
+lemma singleton_eq_intersection (n : ℤ): {n} = ⋂ k ≥ 1, ArithSequence k n := by
+  ext m
+  constructor
+  · intro m_eq_n
+    simp [ArithSequence]
+    refine fun i _ ↦ ⟨0, ?_⟩
+    rw [m_eq_n]
+    ring
+  · intro m_in_inter
+    simp [ArithSequence] at m_in_inter
+    have : ∃x, m = x + n := by
+      rcases m_in_inter 1 (by norm_num) with ⟨x, hx⟩
+      ring_nf at hx
+      use  x
+      rw [hx]
+      ring
+    rcases this with ⟨x, hx⟩
+    rw [hx]at m_in_inter
+    ring_nf at m_in_inter
+    by_cases x_pos : 0 < x
+    · specialize m_in_inter (2*x) (by linarith)
+      rcases m_in_inter with ⟨y, hy⟩
+      have : x = 0 := by
+        have : 2 * y = 1 := by
+          nth_rewrite 2 [← mul_one x] at hy
+          have : 2 * x * y = x * (2 * y) := by ring
+          rw [this] at hy
+          rw [Int.eq_of_mul_eq_mul_left (show x ≠ 0 by linarith) hy]
+        have : (2 * y) % 2 = 1 % 2 := by rw [this]
+        norm_num at this
+      rw [this] at hx
+      simp [hx]
+    · by_cases x_eq_zero : x = 0
+      · rw [x_eq_zero] at hx
+        simp [hx]
+      · specialize m_in_inter (2*(-x))
+        push_neg at x_pos
+        push_neg at x_eq_zero
+        have : 1 ≤ 2*(-x) := by
+          have : 0 ≤ -x := by linarith
+          have h₁ : 0 ≠ -x := by exact Ne.symm ( Int.neg_ne_zero.mpr x_eq_zero)
+          have : 0 < -x := by exact lt_of_le_of_ne this h₁
+          linarith
+        specialize m_in_inter this
+        rcases m_in_inter with ⟨y, x_eq_y⟩
+        have : 2 * (-x) * y = x * (2*(-y)) := by ring
+        rw [this] at x_eq_y
+        have : 2 * (-y) = 1 := by
+          nth_rewrite 2 [← mul_one x] at x_eq_y
+          rw [Int.eq_of_mul_eq_mul_left (show x ≠ 0 by linarith) x_eq_y]
+        have : (2 * (-y)) % 2 = 1 % 2 := by rw [this]
+        norm_num at this
+
+
+
+lemma singletons_closed (n : ℤ): IsClosed {n} := by
+  rw [singleton_eq_intersection]
+  refine isClosed_biInter ?_
+  intro i one_le_i
+  apply IsClosed_of_ArithSequence i n one_le_i
+
+
+lemma Haussdorf_of_ArithSequenceTopology : T2Space ℤ := by
+  constructor
+  intro x y x_ne_y
+  sorry
+
+-- lemma SecondCountable_of_ArithSequenceTopology :
+
+open Set
+open Set.Infinite
+
+lemma Perfect_Z : Perfect (⊤ : Set ℤ) := by
+  constructor
+  · simp
+  · apply preperfect_iff_nhds.mpr
+    intro n n_in_Z U ngh_U_n
+    have : Set.Infinite U := by
+      rcases mem_nhds_iff.mp ngh_U_n with ⟨V, V_sub_U, openV, n_in_V⟩
+      apply Set.Infinite.mono V_sub_U
+      apply Infinite_of_IsOpen (Set.nonempty_of_mem n_in_V) openV
+    -- Set.Infinite.exists_not_mem_finite
+    -- have : Set.Finite {n} := by exact Set.finite_singleton n
+    sorry
+
+
+
+
+
+
+
+
+
 
 lemma primes_cover : ⋃ p ∈ { p : ℕ | Nat.Prime p }, ArithSequence p 0 = {-1, 1}ᶜ := by
   ext n
